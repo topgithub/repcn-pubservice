@@ -130,6 +130,7 @@
     function onOnline() {
 		alert("You are online");
 		$(document).ready(function () {
+			     // ------ Load News Category -------------//
                  var url = "http://www.untvweb.com/news/api/get_category_index/?callback=?";
 				 $.getJSON(url).done(function (response) {
                     //console.log(response.categories);
@@ -151,10 +152,10 @@
                     //list = list.reverse();
                     $('ul#home-list').append(list.join(''));
 					$("#home-list").listview("refresh");
-					
-					
-					
+					// ------ End of Load News Category -------------//
                 }); 
+				
+				// ------Load Recent News ------- //
 				loadrecent();
 				 
             });
@@ -180,7 +181,7 @@
 			$.mobile.showPageLoadingMsg();
 			
 			//use theme swatch "b", a custom message, and no spinner
-			$.mobile.showPageLoadingMsg("b", "This is only a test", true);
+			$.mobile.showPageLoadingMsg("b", "Please wait...", true);
 			
 			currentpage = currentpage + 1;
 			
@@ -226,7 +227,7 @@
 			$.mobile.showPageLoadingMsg();
 			
 			//use theme swatch "b", a custom message, and no spinner
-			$.mobile.showPageLoadingMsg("b", "This is only a test", true);
+			$.mobile.showPageLoadingMsg("b", "Please wait...", true);
 			
 	 $('#newsroom').empty();
 	 $('#loadmore').empty();
@@ -261,6 +262,7 @@
 				
   }
   
+  // ------ Load Recent News ----------- //
   function loadrecent()
   {
      currentpage = 1;
@@ -268,7 +270,7 @@
 			$.mobile.showPageLoadingMsg();
 			
 			//use theme swatch "b", a custom message, and no spinner
-			$.mobile.showPageLoadingMsg("b", "This is only a test", true);
+			$.mobile.showPageLoadingMsg("b", "Please wait....", true);
 			
 	 $('#newsroom').empty();
 	 $('#loadmore').empty();
