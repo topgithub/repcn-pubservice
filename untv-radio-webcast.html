@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>
-	UNTV Live Webcast
+	UNTV RADIO LA VERDAD 1350 kHz - Live Webcast
 </title>
 <!-- Default CSS of jQuery Mobile - Starts -->
 <link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
@@ -11,7 +11,6 @@
 <!-- Default CSS of jQuery Mobile Ends -->
 
 <!-- Other css files -->
-
 <link rel="stylesheet" href="css/untv-mobile.css" />
 
 
@@ -22,8 +21,9 @@
 
 <!-- Other js files -->
 <script src="js/jqm-docs.js" type="text/javascript"></script>
-</head>
-<body id="untv"> 
+</head> 
+
+<body id="untv-radio"> 
 
 <div id="wrapper" data-role="page">
 
@@ -33,7 +33,7 @@
         </a>
         <h1 id="header-logo">
         	<center>
-				<img src="images/untv/logo.png" alt="UNTV - Your Public Service Channel" id="logo-untv" />
+				<img src="images/untv/logo-untv-radio.png" alt="UNTV - Your Public Service Channel" id="logo-untv" />
             </center>
         </h1>
     	<a href="index.html" data-role="button" data-theme="b" data-icon="home" class="ui-btn-right" data-ajax="false">
@@ -45,40 +45,36 @@
     <h2 id="untv-webcast-text" class="title">
     	Live Webcast
     </h2>
-		 <center>
-            <div id="untv-player"></div>
-            <div id="untv-streaming-status">
-
-                <p id="untv-status"></p>
-                <p id="untv-loader">
-                    <img src="images/untv/loader.gif" alt="" />
-                </p>
+		  <div id="radio-player-wrapper">
+                <center>
+                    <div id="untvradio-player"></div>
+                </center>
+                <div id="untvradio-streaming-status">
+                    <p id="untvradio-status"></p>
+                    <p id="untvradio-loader">
+                        <img src="images/untv/loader.gif" alt="" />
+                    </p>
+                </div>
             </div>
-        </center>
 	</div><!-- /content -->
 	
 	<div data-role="footer" data-position="fixed" data-fullscreen="true">
 		
-           <div id="footer-menu" data-role="navbar" data-iconpos="top" data-theme="a">
+       <div id="footer-menu" data-role="navbar" data-iconpos="top" data-theme="a">
             <ul>
                 <li>
-                	<a href="untv-news.html" id="icon-news" data-icon="custom" data-ajax="false">
-                		News
+                    <a href="untv-radio-programs.html" id="icon-radio-webcast" data-icon="custom" data-ajax="false">
+                    	Programs
                     </a>
                 </li>
                 <li>
-                	<a href="untv-programs.html" id="icon-program" data-icon="custom" data-ajax="false">
-                		Programs    
+                	<a href="untv-radio-twitter.html" id="icon-twitter" data-icon="custom" data-ajax="false">
+                		Twitter
                     </a>
                 </li>
                 <li>
-                    <a href="untv-twitter.html" id="icon-twitter" data-icon="custom" data-ajax="false">
-                    	Twitter
-                    </a>
-                </li>
-                <li>
-                    <a href="untv-contact.html" id="icon-contact" data-icon="custom" data-ajax="false">
-                    	Contact
+                	<a href="untv-radio-contact.html" id="icon-program" data-icon="custom" data-ajax="false">
+                		Contact    
                     </a>
                 </li>
             </ul>
@@ -89,37 +85,47 @@
 </div><!-- /page -->
 
  <!--  STARTS -  Player Script -->
-        <script type='text/javascript' src='player/jwplayer.js'></script>
+       <script type='text/javascript' src='player/jwplayer.js'></script>
+
+
 
         <script type='text/javascript'>
-            jwplayer('untv-player').setup({
+
+            jwplayer('untvradio-player').setup({
+
                 'flashplayer': 'player/player.swf',
                 'width': '320',
-                'height': '216',
+                'height': '65',
                 'provider': 'rtmp',  
-                'streamer': 'rtmp://livestream01.untvweb.com/public/',
+                'streamer': 'rtmp://livestream01.untvradio.com/public/',
                 'autostart': 'true',
                 'stretching': 'exactfit',
-                'file': 'untvwebstream',
-                'abouttext': 'UNTV Web',
-                'aboutlink': 'mailto:info@untvweb.com', 
+                'file': 'untvradiostream',
+                'abouttext': 'UNTV Radio',
+                'aboutlink': 'untvradio',
                 'events': {
-                    onBufferChange: function(event) { document.getElementById('untv-status').innerHTML = "Buffering..." },
-                    onPlay: function(event) { document.getElementById('untv-status').innerHTML = "Playing..."; },
-                    onBuffer: function(event) { document.getElementById('untv-status').innerHTML = "Buffering..."; },
-                    onIdle: function(event) { document.getElementById('untv-status').innerHTML = "Connection Idle."; },
-                    onPause: function(event) { document.getElementById('untv-status').innerHTML = "Stopped"; }
+
+                    onBufferChange: function(event) { document.getElementById('untvradio-status').innerHTML = "Buffering..." },
+
+                    onPlay: function(event) { document.getElementById('untvradio-status').innerHTML = "Playing..."; },
+
+                    onBuffer: function(event) { document.getElementById('untvradio-status').innerHTML = "Buffering..."; },
+
+                    onIdle: function(event) { document.getElementById('untvradio-status').innerHTML = "Connection Idle."; },
+
+                    onPause: function(event) { document.getElementById('untvradio-status').innerHTML = "Stopped"; }
+
                 },
+
                 'modes':[{type: 'flash', src: 'player/player.swf'},{
                         type: 'html5',
                         config: {
-                            levels: [ {'file': 'http://livestream01.untvweb.com:1935/public/untvwebstream/playlist.m3u8'} ],
-                            'provider': 'video'
+                            levels: [ {'file': 'http://livestream01.untvradio.com:1935/public/untvradiostream/playlist.m3u8'} ],
+                            'provider': 'audio'
                         }
                     }]
-            });
+            });			
         </script>
-        
         <!--  ENDS - Player Script -->
 </body>
 </html>

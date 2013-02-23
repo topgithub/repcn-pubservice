@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="css/untv-mobile.css" />
 <style>
 body {
-	background: url("images/untv/bg-home.png");
+	background: url("images/untv/bg-home.jpg");
 	background-position: center top;
 	background-repeat: no-repeat;
 	background-color: #31415b;
@@ -39,12 +39,6 @@ body {
 <script src="jquery.mobile-1.0.min.js" type="text/javascript"></script>
 <!-- Default JS of jQuery Mobile - Ends -->
 
-<script type="text/javascript">
-
-            $(window).resize(function() {
-                screendetect();
-            });
-</script>
     </head>
 
     <body onload="screendetect();">
@@ -53,7 +47,7 @@ body {
             <div id="button-untv" class="select-button" onclick="window.location='untv-home.html';" >
                 <img id="UNTV" src="images/untv/icon-home-untv.png" alt=""  />
             </div>
-            <div id="button-untv-radio" class="select-button" onclick="window.location='untv-home.html';" >
+            <div id="button-untv-radio" class="select-button" onclick="window.location='untv-radio-home.html';" >
                 <img id="UNTVRadio" src="images/untv/icon-home-radio.png" alt=""  />
             </div>
         </div>     
@@ -99,6 +93,9 @@ body {
                 });
             }
 
+            $(window).resize(function() {
+                screendetect();
+            });
         </script>
     </body>
 </html>

@@ -16,10 +16,9 @@
 
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
-	
 
 </head> 
-<body onload="onLoad()" id="untv"> 
+<body id="untv" onload="onLoad()"> 
 <div id="wrapper" data-role="page" class="type-home">
 
 <div id="header" data-fullscreen="true" data-position="fixed" data-role="header" data-theme="a">
@@ -70,25 +69,25 @@
 	</div> <!-- END #content -->
 	<div data-role="footer" data-position="fixed" data-fullscreen="true">
 		
-        <div data-role="navbar" data-iconpos="top" data-theme="a">
+        <div id="footer-menu" data-role="navbar" data-iconpos="top" data-theme="a">
             <ul>
                 <li>
-                    <a href="untv-webcast.html" data-icon="grid" data-ajax="false">
+                    <a href="untv-webcast.html" id="icon-webcast" data-icon="custom" data-ajax="false">
                     	Webcast
                     </a>
                 </li>
                 <li>
-                	<a href="untv-programs.html" data-icon="gear" data-ajax="false">
+                	<a href="untv-programs.html" id="icon-program" data-icon="custom" data-ajax="false">
                 		Program    
                     </a>
                 </li>
                 <li>
-                	<a href="untv-twitter.html" data-icon="star" data-ajax="false">
+                	<a href="untv-twitter.html" id="icon-twitter" data-icon="custom" data-ajax="false">
                 		Twitter
                     </a>
                 </li>
                 <li>
-                    <a href="untv-contact.html" data-icon="info" data-ajax="false">
+                    <a href="untv-contact.html" id="icon-contact" data-icon="custom" data-ajax="false">
                     	Contact
                     </a>
                 </li>
