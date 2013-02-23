@@ -1,0 +1,126 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="UTF-8">
+<title>
+	UNTV Live Webcast
+</title>
+<!-- Default CSS of jQuery Mobile - Starts -->
+<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
+<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css"/>
+<!-- Default CSS of jQuery Mobile Ends -->
+
+<!-- Other css files -->
+
+<link rel="stylesheet" href="css/untv-mobile.css" />
+
+</head> 
+
+<body id="untv"> 
+
+<div id="wrapper" data-role="page">
+
+<div id="header" data-fullscreen="true" data-position="fixed" data-role="header" data-theme="a">
+    	<a href="untv-home.html" data-role="button" data-theme="b" data-icon="back" class="ui-btn-left" data-rel="back" >
+        	Back
+        </a>
+        <h1 id="header-logo">
+        	<center>
+				<img src="images/untv/logo.png" alt="UNTV - Your Public Service Channel" id="logo-untv" />
+            </center>
+        </h1>
+    	<a href="index.html" data-role="button" data-theme="b" data-icon="home" class="ui-btn-right" data-ajax="false">
+        	Home
+        </a>
+	</div><!-- /header -->
+
+	<div id="content" data-role="content">	
+    <h2 id="untv-webcast-text" class="title">
+    	Live Webcast
+    </h2>
+		 <center>
+            <div id="untv-player"></div>
+            <div id="untv-streaming-status">
+
+                <p id="untv-status"></p>
+                <p id="untv-loader">
+                    <img src="images/untv/loader.gif" alt="" />
+                </p>
+            </div>
+        </center>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-position="fixed" data-fullscreen="true">
+		
+        <div data-role="navbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="untv-news.html" data-icon="grid" data-ajax="false">
+                    	News
+                    </a>
+                </li>
+                <li>
+                	<a href="untv-programs.html" data-icon="gear" data-ajax="false">
+                		Program    
+                    </a>
+                </li>
+                <li>
+                	<a href="untv-twitter.html" data-icon="star" data-ajax="false">
+                		Twitter
+                    </a>
+                </li>
+                <li>
+                    <a href="untv-contact.html" data-icon="info" data-ajax="false">
+                    	Contact
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    
+	</div><!-- /footer -->
+	
+</div><!-- /page -->
+
+<!-- Default JS of jQuery Mobile - Starts -->
+<script src="jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="jquery.mobile-1.0.min.js" type="text/javascript"></script>
+<!-- Default JS of jQuery Mobile - Ends -->
+
+<!-- Other js files -->
+<script src="js/jqm-docs.js" type="text/javascript"></script>
+
+ <!--  STARTS -  Player Script -->
+        <script type='text/javascript' src='player/jwplayer.js'></script>
+
+        <script type='text/javascript'>
+            jwplayer('untv-player').setup({
+                'flashplayer': 'player/player.swf',
+                'width': '320',
+                'height': '216',
+                'provider': 'rtmp',  
+                'streamer': 'rtmp://livestream01.untvweb.com/public/',
+                'autostart': 'true',
+                'stretching': 'exactfit',
+                'file': 'untvwebstream',
+                'abouttext': 'UNTV Web',
+                'aboutlink': 'mailto:info@untvweb.com', 
+                'events': {
+                    onBufferChange: function(event) { document.getElementById('untv-status').innerHTML = "Buffering..." },
+                    onPlay: function(event) { document.getElementById('untv-status').innerHTML = "Playing..."; },
+                    onBuffer: function(event) { document.getElementById('untv-status').innerHTML = "Buffering..."; },
+                    onIdle: function(event) { document.getElementById('untv-status').innerHTML = "Connection Idle."; },
+                    onPause: function(event) { document.getElementById('untv-status').innerHTML = "Stopped"; }
+                },
+                'modes':[{type: 'flash', src: 'player/player.swf'},{
+                        type: 'html5',
+                        config: {
+                            levels: [ {'file': 'http://livestream01.untvweb.com:1935/public/untvwebstream/playlist.m3u8'} ],
+                            'provider': 'video'
+                        }
+                    }]
+            });
+        </script>
+        
+        <!--  ENDS - Player Script -->
+</body>
+</html>

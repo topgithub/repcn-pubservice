@@ -1,0 +1,104 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="UTF-8">
+<title>
+	UNTV Mobile App
+</title>
+<!-- Default CSS of jQuery Mobile - Starts -->
+<link href="jquery.mobile.theme-1.0.min.css" rel="stylesheet" type="text/css"/>
+<link href="jquery.mobile.structure-1.0.min.css" rel="stylesheet" type="text/css"/>
+<!-- Default CSS of jQuery Mobile Ends -->
+
+<!-- Other css files -->
+<link rel="stylesheet" href="css/jqm-docs.css" />
+<link rel="stylesheet" href="css/untv-mobile.css" />
+<style>
+body {
+	background: url("images/untv/bg-home.png");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-color: #31415b;
+/*                background-size: 1000px 1000px;*/
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+#untv-mobile {
+	overflow: visible;
+	padding: 0 !important;
+}
+#wrapper, #untv-mobile {
+	background: none !important;
+}
+</style>
+<!-- Default JS of jQuery Mobile - Starts -->
+<script src="jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="jquery.mobile-1.0.min.js" type="text/javascript"></script>
+<!-- Default JS of jQuery Mobile - Ends -->
+
+<script type="text/javascript">
+
+            $(window).resize(function() {
+                screendetect();
+            });
+</script>
+    </head>
+
+    <body onload="screendetect();">
+<div id="wrapper" data-role="page" class="type-home">
+        <div id="untv-mobile" data-role="content">
+            <div id="button-untv" class="select-button" onclick="window.location='untv-home.html';" >
+                <img id="UNTV" src="images/untv/icon-home-untv.png" alt=""  />
+            </div>
+            <div id="button-untv-radio" class="select-button" onclick="window.location='untv-home.html';" >
+                <img id="UNTVRadio" src="images/untv/icon-home-radio.png" alt=""  />
+            </div>
+        </div>     
+</div>  
+        <script type="text/javascript">
+            function screendetect(){
+                var w = $(window).width();
+                var h = $(window).height();
+                var ds = 0;
+                if (h < w) {
+                    ds = h;
+                }
+                else { 
+                    ds = w; 
+                };
+                
+                var cw = ds * 0.68;
+                var ch = ds * 0.96;
+                var ml = cw / 2;
+                var mt = ch / 2;
+                var csswidth = cw + 'px';
+                var cssheight = ch + 'px';
+                var cssmarginleft = '-' + ml + 'px';
+                var cssmargintop = '-' + mt + 'px';
+                
+                $("#untv-mobile").css({
+                        'width' : csswidth,
+                        'height' : cssheight,
+                        'position' : 'fixed',
+                        'top' : '50%',
+                        'left' : '50%',
+                        'margin-left' : cssmarginleft,
+                        'margin-top' : cssmargintop,
+                        'text-align' :  'center'
+                });
+                $("#UNTV").css({
+                        'width' : csswidth,
+                        'height' : cssmargintop
+                });
+                $("#UNTVRadio").css({
+                        'width' : csswidth,
+                        'height' : cssmargintop
+                });
+            }
+
+        </script>
+    </body>
+</html>
