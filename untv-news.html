@@ -107,12 +107,14 @@
 
 <script type="text/javascript">
 
- // Call onDeviceReady when Cordova is loaded.
+    // Call onDeviceReady when Cordova is loaded.
     //
     // At this point, the document has loaded but cordova-2.4.0.js has not.
     // When Cordova is loaded and talking with the native device,
     // it will call the event `deviceready`.
     //
+	var db = window.openDatabase("untv", "1.0", "UNTV DB", 1000000);
+	
     function onLoad() {
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -127,7 +129,7 @@
     // Handle the online event
     //
     function onOnline() {
-		alert("You are online");
+		
 		$(document).ready(function () {
 			     // ------ Load News Category -------------//
                  var url = "http://www.untvweb.com/news/api/get_category_index/?callback=?";
@@ -158,14 +160,62 @@
 				loadrecent();
 				 
             });
-			
+	  // Insert Data to database
+	  db.transaction(populateDB, errorCB, successCB);
     }
     
+	function populateDB(tx) {
+        tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
+        tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (1, "America")');
+        tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (2, "Entertainment")');
+		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (3, "Government")');
+     }
+
+    function errorCB(err) {
+        alert("Error processing SQL: "+err.code);
+     }
+
+	function successCB() {
+   		 alert("success!");
+	}
 	// Handle the offline event
     //
     function onOffline() {
 		alert("You are offline");
+		db.transaction(queryDB, errorCB);
+		
     }
+	
+	// Query the database
+    //
+    function queryDB(tx) {
+        tx.executeSql('SELECT * FROM CATEGORY', [], querySuccess, errorCB);
+    }
+	
+	// Query the success callback
+    //
+    function querySuccess(tx, results) {
+     console.log("Returned rows = " + results.rows.length);
+     // this will be true since it was a select statement and so rowsAffected was 0
+     if (!results.rowsAffected) {
+        console.log('No rows affected!');
+        return false;
+     }
+	 else {
+		  $('#home-list').append('<ul id="untv-category">');
+          var li = "", list = [];
+          for (var i=0; i<len; i++){
+            console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+			li += "<li><a href='#' onClick='loadcategory(" + results.rows.item(i).id + ");' data-ajax='false'>";
+            li += results.rows.item(i).data;
+            li += "</a></li>";
+         }
+		 $('ul#home-list').append(list.join(''));
+		 $("#home-list").listview("refresh");
+	   }
+     }
+	
   // Global Variables	
   var totalpost;
   var totalpage;
