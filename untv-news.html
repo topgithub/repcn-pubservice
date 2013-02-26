@@ -196,24 +196,19 @@
 	// Query the success callback
     //
     function querySuccess(tx, results) {
-     alert("Returned rows = " + results.rows.length);
-     // this will be true since it was a select statement and so rowsAffected was 0
-     if (!results.rowsAffected) {
-        alert('No rows affected!');
-		return false;
-     }
-	 else {
-		  $('#home-list').append('<ul id="untv-category">');
-          var li = "", list = [];
-          for (var i=0; i<len; i++){
-            console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
-			li += "<li><a href='#' onClick='loadcategory(" + results.rows.item(i).id + ");' data-ajax='false'>";
-            li += results.rows.item(i).data;
-            li += "</a></li>";
-         }
-		 $('ul#home-list').append(list.join(''));
-		 $("#home-list").listview("refresh");
-	   }
+	 var len = results.rows.length;
+	 $('#home-list').append('<ul id="untv-category">');
+     var li = "";
+	 for (var i=0; i<len; i++){
+	     alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+		 li += "<li><a href='#' onClick='loadcategory(" + results.rows.item(i).id + ");' data-ajax='false'>";
+         li += results.rows.item(i).data;
+         li += "</a></li>";
+			
+	 }
+	  $('ul#home-list').append(li);
+      $("#home-list").listview("refresh");
+		
      }
 	
   // Global Variables	
