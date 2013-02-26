@@ -145,8 +145,8 @@
 					    //console.log(rObj);
 						if (rObj.parent == 0)
 						{
-						mycattile[index] = rObj.title;
-						mycatid[index] = rObj.id;
+						//mycattile[index] = rObj.title;
+						//mycatid[index] = rObj.id;
 						li = "";
 						li += "<li><a href='#' onClick='loadcategory(" + rObj.id + ");' data-ajax='false'>";
                     	li += rObj.title;
@@ -172,11 +172,12 @@
         tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
         tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
 		
-		$.each( mycattitle, function( key, value ) {
-		  alert('INSERT INTO CATEGORY (id, data) VALUES (' + mycatid[key] + ', "' + value +'")');
-          tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (' + mycatid[key] + ', "' + value +'")');
-        });
-
+		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (1, "America")');
+		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (2, "Sports")');
+		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (3, "Entertainment")');
+		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (4, "Asia")');
+		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (5, "Religion")');
+        tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (6, "World")');
      }
 
     function errorCB(err) {
