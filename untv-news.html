@@ -114,9 +114,7 @@
     // it will call the event `deviceready`.
     //
 	var db = window.openDatabase("untv", "1.0", "UNTV DB", 1000000);
-	var mycattitle = new Array();
-	var mycatid = new Array();
-    function onLoad() {
+	function onLoad() {
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
     }
