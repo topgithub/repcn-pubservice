@@ -114,7 +114,7 @@
     // it will call the event `deviceready`.
     //
 	var db = window.openDatabase("untv", "1.0", "UNTV DB", 1000000);
-	
+	var mycategory;
     function onLoad() {
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -137,6 +137,7 @@
                     //console.log(response.categories);
                     var posts = response.posts; //here's your response
                     var r = response.categories;
+					mycategory = response.categories;
                     $('#home-list').append('<ul id="untv-category">');
                     var li = "", list = [];
                     $.each(r, function (index, rObj) {
@@ -167,9 +168,15 @@
 	function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
         tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
-        tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (1, "America")');
-        tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (2, "Entertainment")');
-		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (3, "Government")');
+         $.each(mycategory, function (index, rObj) {
+		   //console.log(rObj);
+		   if (rObj.parent == 0)
+			{
+			   alert(rObj.id + ' ' + rObj.title);
+			   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (' + rObj.id + ', "' + rObj.title +'")');
+			}
+        });
+		
      }
 
     function errorCB(err) {
