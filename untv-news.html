@@ -140,7 +140,7 @@
 					mycategory = response.categories;
                     $('#home-list').append('<ul id="untv-category">');
                     var li = "", list = [];
-					var y;
+					var y = 0;
 					$.each(r, function (index, rObj) {
 					    //console.log(rObj);
 						if (rObj.parent == 0)
@@ -156,6 +156,7 @@
 						sqlinsert[y] = "INSERT INTO CATEGORY (id,data) VALUES (" + rObj.id +",'"+ rObj.title +"')";
 						}
                     });
+					    alert(sqlinsert.length);
 					    db.transaction(function (tx) {
 		  				tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
           				tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
