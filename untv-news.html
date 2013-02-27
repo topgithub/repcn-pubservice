@@ -115,8 +115,8 @@
     // it will call the event `deviceready`.
     //
 	var db = window.openDatabase("untv", "1.0", "UNTV DB", 1000000);
-	var catid = new Array();
-	var catname = new Array();
+	var catid;
+	var catname;
 	function onLoad() {
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -142,6 +142,8 @@
                     $('#home-list').append('<ul id="untv-category">');
                     var li = "", list = [];
 					var y = 0;
+					catname = new Array();
+					catid = new Array();
 					$.each(r, function (index, rObj) {
 					    //console.log(rObj);
 						if (rObj.parent == 0)
@@ -158,20 +160,18 @@
 						catname[y] = rObj.title;
 						}
                     });
+					//list = list.reverse();
 					db.transaction(function (tx) {
 		  				tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
           				tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
-						$.each(catid,
-							function(intIndex, objValue ){
-							   alert("id-" + objValue + " catname-" + catname[intIndex]);
-							   tx.executeSql(objValue);
-							   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[objValue, catname[intIndex]]);
-							   
-							}
-						);
-						},errorCB, successCB);
+						 tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[0], catname[0]]);
+	                     tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[1], catname[1]]);
+	                     tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[2], catname[2]]);
+	                     tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[3], catname[3]]);
+	                     tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[4], catname[4]]);
+					},errorCB, successCB);
 						
-                    //list = list.reverse();
+					
                     $('ul#home-list').append(list.join(''));
 					$("#home-list").listview("refresh");
 					
@@ -188,7 +188,7 @@
             });
 			
 	  // Insert Data to database
-	  // db.transaction(populateDB, errorCB, successCB);
+	  db.transaction(populateDB, errorCB, successCB);
 
     }
     
