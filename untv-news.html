@@ -207,7 +207,9 @@
     function errorCB(err) {
         alert("Error processing SQL: "+err.code);
      }
-
+    function errorCB1(err) {
+        alert("News Details Error processing SQL: "+err.code);
+     }
 	function successCB() {
    		 alert("success!");
 	}
@@ -227,7 +229,7 @@
     //
     function queryDB(tx) {
         tx.executeSql('SELECT * FROM CATEGORY', [], querySuccess, errorCB);
-		tx.executeSql('SELECT * FROM NEWS', [], querySuccess1, errorCB);
+		//tx.executeSql('SELECT * FROM NEWS', [], querySuccess1, errorCB);
     }
 	
 	// Query the success callback
@@ -376,7 +378,7 @@
 			
 	 $('#newsroom').empty();
 	 $('#loadmore').empty();
-	 var url2 = "http://www.untvweb.com/news/api/get_recent_posts/?callback=?&count=10";
+	 var url2 = "http://www.untvweb.com/news/api/get_recent_posts/?callback=?&count=5";
 	            $.getJSON(url2).done(function (response) {
 					$("#news-title").text("Latest News");
 					var posts = response.posts; //here's your response
@@ -413,7 +415,7 @@
 							   }
 						   }
 						);
-						},errorCB, successCB1);
+						},errorCB1, successCB1);
 						
                     list = list.reverse();
                     $('ul#newsroom').append(li);
