@@ -47,6 +47,12 @@
 				
 				
 			</ul>
+            
+            <ul id="home-list1" data-role="listview">
+				
+				
+			</ul>
+            
 
 		</div> <!--/content-secondary -->
 
@@ -130,7 +136,8 @@
     function onOnline() {
 		
 		$(document).ready(function () {
-			     // ------ Load News Category -------------//
+			     $("home-list").show();
+		         // ------ Load News Category -------------//
                  var url = "http://www.untvweb.com/news/api/get_category_index/?callback=?";
 				 $.getJSON(url).done(function (response) {
                     //console.log(response.categories);
@@ -155,6 +162,10 @@
                     //list = list.reverse();
                     $('ul#home-list').append(list.join(''));
 					$("#home-list").listview("refresh");
+					
+					$('ul#home-list1').append(list.join(''));
+					$("#home-list1").listview("refresh");
+					$("home-list1").hide();
 					// ------ End of Load News Category -------------//
                 }); 
 				
@@ -163,19 +174,13 @@
 				 
             });
 	  // Insert Data to database
-	  db.transaction(populateDB, errorCB, successCB);
+	  //db.transaction(populateDB, errorCB, successCB);
     }
     
 	function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
         tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
 		
-		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (1, "America")');
-		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (2, "Sports")');
-		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (3, "Entertainment")');
-		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (4, "Asia")');
-		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (5, "Religion")');
-        tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (6, "World")');
      }
 
     function errorCB(err) {
@@ -189,8 +194,9 @@
     //
     function onOffline() {
 		alert("You are offline");
-		db.transaction(queryDB, errorCB);
-		
+		$("home-list").hide();
+		$("home-list1").show();
+		//db.transaction(queryDB, errorCB);
     }
 	
 	// Query the database
