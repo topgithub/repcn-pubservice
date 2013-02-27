@@ -115,7 +115,8 @@
     // it will call the event `deviceready`.
     //
 	var db = window.openDatabase("untv", "1.0", "UNTV DB", 1000000);
-	var sqlinsert = new Array();
+	var catid = new Array();
+	var catname = new Array();
 	function onLoad() {
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -153,7 +154,8 @@
                     	li += rObj.title;
                         li += "</a></li>";
 				        list[index] = li;
-						sqlinsert[y] = 'INSERT INTO CATEGORY (id unique, data) VALUES ('+ rObj.id +', "'+ rObj.title +'")';
+						catid[y] =  rObj.id;
+						catname[y] = rObj.title;
 						}
                     });
 					    
@@ -185,11 +187,11 @@
 //	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (3, "Test 3")');
 //	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (4, "Test 4")');
 //	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (5, "Test 5")');
-	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[6, "Test 6"]);
-	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[7, "Test 7"]);
-	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[8, "Test 8"]);
-	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[9, "Test 9"]);
-	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[10, "Test 10"]);
+	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[0], catname[0]]);
+	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[1], catname[1]]);
+	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[2], catname[2]]);
+	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[3], catname[3]]);
+	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[4], catname[4]]);
      }
 
     function errorCB(err) {
