@@ -48,13 +48,7 @@
 				
 			</ul>
             
-            <ul id="home-list1" data-role="listview">
-				
-				<li>data 1</li>
-                <li>data 2</li>
-                <li>data 3</li>
-            </ul>
-
+           
 		</div> <!--/content-secondary -->
 
 		<div class="content-primary">
@@ -137,8 +131,7 @@
     function onOnline() {
 		
 		$(document).ready(function () {
-			     $("home-list").show();
-		         // ------ Load News Category -------------//
+			     // ------ Load News Category -------------//
                  var url = "http://www.untvweb.com/news/api/get_category_index/?callback=?";
 				 $.getJSON(url).done(function (response) {
                     //console.log(response.categories);
@@ -147,6 +140,7 @@
 					mycategory = response.categories;
                     $('#home-list').append('<ul id="untv-category">');
                     var li = "", list = [];
+					var sqlinsert = new Array();
                     $.each(r, function (index, rObj) {
 					    //console.log(rObj);
 						if (rObj.parent == 0)
@@ -158,6 +152,7 @@
                     	li += rObj.title;
                         li += "</a></li>";
 				        list[index] = li;
+						sqlinsert[index] = "INSERT INTO CATEGORY (id,data) VALUES (" + rObj.id +",'"+ rObj.title +"')";
 						}
                     });
                     //list = list.reverse();
@@ -166,7 +161,7 @@
 					
 					$('ul#home-list1').append(list.join(''));
 					$("#home-list1").listview("refresh");
-					$("home-list1").hide();
+					
 					// ------ End of Load News Category -------------//
                 }); 
 				
@@ -175,7 +170,16 @@
 				 
             });
 	  // Insert Data to database
-	  //db.transaction(populateDB, errorCB, successCB);
+	    db.transaction(function (tx) {
+		  tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
+          tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
+		  for (var x=0;x<sqlinsert.length;x++)
+             { 
+			      alert(sqlinsert[x]);
+                  tx.executeSql(sqlinsert[x]);
+             }
+		  },errorCB, successCB);
+
     }
     
 	function populateDB(tx) {
@@ -195,9 +199,7 @@
     //
     function onOffline() {
 		alert("You are offline");
-		$("home-list").hide();
-		$("home-list1").show();
-		//db.transaction(queryDB, errorCB);
+		db.transaction(queryDB, errorCB);
     }
 	
 	// Query the database
