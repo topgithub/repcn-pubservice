@@ -185,6 +185,11 @@
 	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (3, "Test 3")');
 	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (4, "Test 4")');
 	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (5, "Test 5")');
+	   tx.executeSql("INSERT INTO tableName(id, serverURL) VALUES (?,?)",[6, "Test 6"]);
+	   tx.executeSql("INSERT INTO tableName(id, serverURL) VALUES (?,?)",[7, "Test 7"]);
+	   tx.executeSql("INSERT INTO tableName(id, serverURL) VALUES (?,?)",[8, "Test 8"]);
+	   tx.executeSql("INSERT INTO tableName(id, serverURL) VALUES (?,?)",[9, "Test 9"]);
+	   tx.executeSql("INSERT INTO tableName(id, serverURL) VALUES (?,?)",[10, "Test 10"]);
      }
 
     function errorCB(err) {
