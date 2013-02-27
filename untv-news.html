@@ -160,12 +160,17 @@
 					    db.transaction(function (tx) {
 		  				tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
           				tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
-		  				for (var x=0;x<sqlinsert.length;x++)
-             				{ 
-			      				alert(sqlinsert[x]);
-                				tx.executeSql(sqlinsert[x]);
-             				}
-		  				},errorCB, successCB);
+						$.each(sqlinsert,
+							function( intIndex, objValue ){
+							   alert(objValue);
+							   tx.executeSql(objValue);
+							}
+						);
+						},errorCB, successCB);
+						
+						// Loop over each value in the array.
+						
+
 
                     //list = list.reverse();
                     $('ul#home-list').append(list.join(''));
