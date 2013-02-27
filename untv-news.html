@@ -129,10 +129,10 @@
     // Handle the online event
     //
     function onOnline() {
-		
+		var sqlinsert = new Array();
+		var url = "http://www.untvweb.com/news/api/get_category_index/?callback=?";
 		$(document).ready(function () {
 			     // ------ Load News Category -------------//
-                 var url = "http://www.untvweb.com/news/api/get_category_index/?callback=?";
 				 $.getJSON(url).done(function (response) {
                     //console.log(response.categories);
                     var posts = response.posts; //here's your response
@@ -140,8 +140,7 @@
 					mycategory = response.categories;
                     $('#home-list').append('<ul id="untv-category">');
                     var li = "", list = [];
-					var sqlinsert = new Array();
-                    $.each(r, function (index, rObj) {
+					$.each(r, function (index, rObj) {
 					    //console.log(rObj);
 						if (rObj.parent == 0)
 						{
@@ -152,7 +151,9 @@
                     	li += rObj.title;
                         li += "</a></li>";
 				        list[index] = li;
+						alert("INSERT INTO CATEGORY (id,data) VALUES (" + rObj.id +",'"+ rObj.title +"')");
 						sqlinsert[index] = "INSERT INTO CATEGORY (id,data) VALUES (" + rObj.id +",'"+ rObj.title +"')";
+						
 						}
                     });
                     //list = list.reverse();
