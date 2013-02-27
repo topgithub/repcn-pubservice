@@ -140,18 +140,20 @@
 					mycategory = response.categories;
                     $('#home-list').append('<ul id="untv-category">');
                     var li = "", list = [];
+					var y;
 					$.each(r, function (index, rObj) {
 					    //console.log(rObj);
 						if (rObj.parent == 0)
 						{
 						//mycattile[index] = rObj.title;
 						//mycatid[index] = rObj.id;
+						y = y + 1;
 						li = "";
 						li += "<li><a href='#' onClick='loadcategory(" + rObj.id + ");' data-ajax='false'>";
                     	li += rObj.title;
                         li += "</a></li>";
 				        list[index] = li;
-						sqlinsert[index] = "INSERT INTO CATEGORY (id,data) VALUES (" + rObj.id +",'"+ rObj.title +"')";
+						sqlinsert[y] = "INSERT INTO CATEGORY (id,data) VALUES (" + rObj.id +",'"+ rObj.title +"')";
 						}
                     });
 					    db.transaction(function (tx) {
