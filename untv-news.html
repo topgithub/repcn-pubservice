@@ -169,16 +169,17 @@
 				loadrecent();
 				 
             });
+			alert(sqlinsert.length);
 	  // Insert Data to database
-	    db.transaction(function (tx) {
-		  tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
-          tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
-		  for (var x=0;x<sqlinsert.length;x++)
-             { 
-			      alert(sqlinsert[x]);
-                  tx.executeSql(sqlinsert[x]);
-             }
-		  },errorCB, successCB);
+	    //db.transaction(function (tx) {
+//		  tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
+//          tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
+//		  for (var x=0;x<sqlinsert.length;x++)
+//             { 
+//			      alert(sqlinsert[x]);
+//                tx.executeSql(sqlinsert[x]);
+//             }
+//		  },errorCB, successCB);
 
     }
     
