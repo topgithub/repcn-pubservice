@@ -180,11 +180,11 @@
 	function populateDB(tx) {
        tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
        tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
-		tx.executeSql('INSERT INTO CATEGORY (id unique, data) VALUES (1, "Test 1")');
-		tx.executeSql('INSERT INTO CATEGORY (id unique, data) VALUES (2, "Test 2")');
-		tx.executeSql('INSERT INTO CATEGORY (id unique, data) VALUES (3, "Test 3")');
-		tx.executeSql('INSERT INTO CATEGORY (id unique, data) VALUES (4, "Test 4")');
-		tx.executeSql('INSERT INTO CATEGORY (id unique, data) VALUES (5, "Test 5")');
+	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (1, "Test 1")');
+	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (2, "Test 2")');
+	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (3, "Test 3")');
+	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (4, "Test 4")');
+	   tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (5, "Test 5")');
      }
 
     function errorCB(err) {
