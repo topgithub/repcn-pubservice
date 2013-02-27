@@ -162,10 +162,9 @@
                     });
 					//list = list.reverse();
 					db.transaction(function (tx) {
-		  				tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
-          				tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
-						 tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[0], catname[0]]);
-	                     tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[1], catname[1]]);
+		  				 tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
+          				 tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
+						 tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[1], catname[1]]);
 	                     tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[2], catname[2]]);
 	                     tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[3], catname[3]]);
 	                     tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[4], catname[4]]);
@@ -188,7 +187,7 @@
             });
 			
 	  // Insert Data to database
-	  db.transaction(populateDB, errorCB, successCB);
+	  //db.transaction(populateDB, errorCB, successCB);
 
     }
     
