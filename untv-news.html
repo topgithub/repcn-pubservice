@@ -156,6 +156,7 @@
 						
 						}
                     });
+					alert(sqlinsert.length);
                     //list = list.reverse();
                     $('ul#home-list').append(list.join(''));
 					$("#home-list").listview("refresh");
@@ -170,7 +171,7 @@
 				loadrecent();
 				 
             });
-			alert(sqlinsert.length);
+			
 	  // Insert Data to database
 	    //db.transaction(function (tx) {
 //		  tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
