@@ -151,12 +151,19 @@
                     	li += rObj.title;
                         li += "</a></li>";
 				        list[index] = li;
-						alert("INSERT INTO CATEGORY (id,data) VALUES (" + rObj.id +",'"+ rObj.title +"')");
 						sqlinsert[index] = "INSERT INTO CATEGORY (id,data) VALUES (" + rObj.id +",'"+ rObj.title +"')";
-						
 						}
                     });
-					alert(sqlinsert.length);
+					    db.transaction(function (tx) {
+		  				tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
+          				tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
+		  				for (var x=0;x<sqlinsert.length;x++)
+             				{ 
+			      				alert(sqlinsert[x]);
+                				tx.executeSql(sqlinsert[x]);
+             				}
+		  				},errorCB, successCB);
+
                     //list = list.reverse();
                     $('ul#home-list').append(list.join(''));
 					$("#home-list").listview("refresh");
@@ -173,15 +180,7 @@
             });
 			
 	  // Insert Data to database
-	    //db.transaction(function (tx) {
-//		  tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
-//          tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
-//		  for (var x=0;x<sqlinsert.length;x++)
-//             { 
-//			      alert(sqlinsert[x]);
-//                tx.executeSql(sqlinsert[x]);
-//             }
-//		  },errorCB, successCB);
+	   
 
     }
     
