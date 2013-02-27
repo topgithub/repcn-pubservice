@@ -378,7 +378,7 @@
 			
 	 $('#newsroom').empty();
 	 $('#loadmore').empty();
-	 var url2 = "http://www.untvweb.com/news/api/get_recent_posts/?callback=?&count=5";
+	 var url2 = "http://www.untvweb.com/news/api/get_recent_posts/?callback=?&count=3";
 	            $.getJSON(url2).done(function (response) {
 					$("#news-title").text("Latest News");
 					var posts = response.posts; //here's your response
@@ -387,8 +387,8 @@
                     $.each(posts, function (index, rObj) {
                         //console.log(rObj);
                         li += "<li>";
-				li += "<a href='untv-newsdetails.html?id=" + rObj.id + "' data-ajax='false'>";
-				li += "<img src='" + rObj.thumbnail  + "' onClick=&quot;getfile('" + rObj.thumbnail  + "');&quot;  />";
+				        li += "<a href='untv-newsdetails.html?id=" + rObj.id + "' data-ajax='false'>";
+				        li += "<img src='" + rObj.thumbnail  + "' />";
 						li += "<h4>"+ rObj.title +"</h4>";
 						li += "<p><i>Date Publish:"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
 						li += "</a></li>";
@@ -399,7 +399,7 @@
 	 					excerpt[index]  = rObj.excerpt;
 	 					content[index]  = rObj.content;
 						// save image to device
-						//thumbnail[index] = getfile(rObj.thumbnail);
+						getfile(rObj.thumbnail);
 						
                     });
 					
@@ -445,7 +445,7 @@
                                            sPath + filename,
                                            function(theFile) {
                                            alert("download complete: " + theFile.toURI());
-                                           return theFile.toURI();
+                                           //return theFile.toURI();
 										   },
                                            function(error) {
                                            alert("download error source " + error.source);
