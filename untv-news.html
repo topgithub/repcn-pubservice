@@ -153,7 +153,7 @@
                     	li += rObj.title;
                         li += "</a></li>";
 				        list[index] = li;
-						sqlinsert[y] = 'INSERT INTO CATEGORY (id, data) VALUES ('+ rObj.id +', "'+ rObj.title +'")';
+						sqlinsert[y] = 'INSERT INTO CATEGORY (id unique, data) VALUES ('+ rObj.id +', "'+ rObj.title +'")';
 						}
                     });
 					    
@@ -180,10 +180,10 @@
 	function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
         tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
-		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (1, "World")');
-		tx.executeSql('INSERT INTO CATEGORY (id, data) VALUES (2, "Asia")');
-		
-		
+		tx.executeSql(sqlinsert[0]);
+		tx.executeSql(sqlinsert[1]);
+		tx.executeSql(sqlinsert[2]);
+		tx.executeSql(sqlinsert[3]);
      }
 
     function errorCB(err) {
