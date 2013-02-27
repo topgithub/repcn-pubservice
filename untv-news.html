@@ -180,10 +180,10 @@
 	function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
         tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
-		tx.executeSql(sqlinsert[0].toString());
-		tx.executeSql(sqlinsert[1].toString());
-		tx.executeSql(sqlinsert[2].toString());
-		tx.executeSql(sqlinsert[3].toString());
+		alert(sqlinsert[0].toString());
+		alert(sqlinsert[1].toString());
+		alert(sqlinsert[2].toString());
+		alert(sqlinsert[3].toString());
      }
 
     function errorCB(err) {
