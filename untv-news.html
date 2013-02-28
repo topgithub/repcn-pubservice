@@ -410,25 +410,35 @@
 						thumbnail[y] = rObj.thumbnail;
 						y = y + 1;
                     });
-			// insert to local database
-			db.transaction(function (tx) {
-		    tx.executeSql('DROP TABLE IF EXISTS NEWS');
-          	tx.executeSql('CREATE TABLE IF NOT EXISTS NEWS (postid unique, catid,newstitle,datepub,excerpt,content,thumbnail)');
-						$.each(postid,
-							function( intIndex, objValue ){
-								alert(thumbnail[intIndex]);
-					         //tx.executeSql("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex],localimage]);
-						  }
-						);
-						},errorCB1, successCB1);
-						
-                    list = list.reverse();
-                    $('ul#newsroom').append(li);
-					$("#newsroom").listview("refresh");
 					
-					//hide the page loader
-			        $.mobile.hidePageLoadingMsg();
-                });
+			$.each(thumbnail,
+				 function(intIndex, objValue ){
+						  getfile(objValue);
+						  alert(localimage);
+			     }
+			);
+					
+						
+			// insert to local database
+			//db.transaction(function (tx) {
+//		    tx.executeSql('DROP TABLE IF EXISTS NEWS');
+//          	tx.executeSql('CREATE TABLE IF NOT EXISTS NEWS (postid unique, catid,newstitle,datepub,excerpt,content,thumbnail)');
+//						$.each(postid,
+//							function( intIndex, objValue ){
+//								alert(thumbnail[intIndex]);
+//					         //tx.executeSql("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex],localimage]);
+//						  }
+//						);
+//						},errorCB1, successCB1);
+//						
+//                    list = list.reverse();
+//                    $('ul#newsroom').append(li);
+//					$("#newsroom").listview("refresh");
+//					
+//					//hide the page loader
+//			        $.mobile.hidePageLoadingMsg();
+
+           });
 				
   }
   
