@@ -101,11 +101,7 @@
 <!-- Default JS of jQuery Mobile - Starts -->
 <script src="jquery-1.6.4.min.js" type="text/javascript"></script>
 <script src="jquery.mobile-1.0.min.js" type="text/javascript"></script>
- Default JS of jQuery Mobile - Ends 
-
- Other js files 
 <script src="js/jqm-docs.js" type="text/javascript"></script>
-
 <script type="text/javascript">
 
     // Call onDeviceReady when Cordova is loaded.
@@ -390,13 +386,15 @@
   
   function loadcategoryoffline(newsid)
   {
+	  alert(newsid);
 	  $.mobile.showPageLoadingMsg();
 	  //use theme swatch "b", a custom message, and no spinner
 	  $.mobile.showPageLoadingMsg("b", "Please wait...", true);
+	  
 	  db.transaction(
 	   function (tx) {
-		    tx.executeSql("SELECT * FROM NEWS where catid=?", [newsid], errorCB1, successCB2);
-		});
+		    tx.executeSql("SELECT * FROM NEWS WHERE catid=?",[newsid]);
+		},errorCB1, successCB2);
 
       //hide the page loader
 	  $.mobile.hidePageLoadingMsg();
