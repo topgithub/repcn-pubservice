@@ -416,7 +416,37 @@
 					
 				$.each(thumbnail,
 							function( intIndex, objValue ){
-								alert(thumbnail[intIndex]);
+								  // -------------- saving ----------------------------------//
+								 var strimageurl = thumbnail[intIndex]			
+								 var fileNameIndex = strimageurl.lastIndexOf("/") + 1;
+								 var filename = strimageurl.substr(fileNameIndex);
+								 window.requestFileSystem(
+								 LocalFileSystem.PERSISTENT, 0, 
+								 function onFileSystemSuccess(fileSystem) {
+								 fileSystem.root.getFile(
+											 "dummy.html", {create: true, exclusive: false}, 
+											 function gotFileEntry(fileEntry){
+											 var sPath = fileEntry.fullPath.replace("dummy.html","");
+											 var fileTransfer = new FileTransfer();
+											 fileEntry.remove();
+											 fileTransfer.download(
+													   strimageurl,
+													   sPath + filename,
+													   function(theFile) {
+													   alert("download complete: " + theFile.toURI());
+													   //localimage = theFile.toURI();
+													   },
+													   function(error) {
+													   alert("download error source " + error.source);
+													   alert("download error target " + error.target);
+													   alert("upload error code: " + error.code);
+													   }
+													   );
+											 }, 
+											 fail);
+								 }, 
+								 fail);
+								 // -------------- saving ----------------------------------//
 					        }
 						);
 
