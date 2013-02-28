@@ -262,7 +262,7 @@
 			li += "<a href='newsoffline.html?id=" +  results.rows.item(i).postid + "' data-ajax='false'>";
 			li += "<img src='" + results.rows.item(i).thumbnail  + "' />";
 			li += "<h4>"+ results.rows.item(i).newstitle +"</h4>";
-			li += "<p><i>Date Publish:"+ results.rows.item(i).pubdate + "</i><br />" + results.rows.item(i).excerpt +"</p>";
+			li += "<p><i>"+ results.rows.item(i).pubdate + "</i><br />" + results.rows.item(i).excerpt +"</p>";
 			li += "</a></li>";
 	   }
 	   $('ul#newsroom').append(li);
@@ -299,7 +299,7 @@
 						li += "<a href='untv-newsdetails.html?id=" + rObj.id + "' data-ajax='false'>";
 						li += "<img src='" + rObj.thumbnail  + "' />";
 						li += "<h4>"+ rObj.title +"</h4>";
-						li += "<p><i>Date Publish:"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
+						li += "<p><i>"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
 						li += "</a></li>";
 						list[index] = li;
                     });
@@ -342,7 +342,7 @@
 						li += "<a href='untv-newsdetails.html?id=" + rObj.id + "' data-ajax='false'>";
 						li += "<img src='" + rObj.thumbnail  + "' />";
 						li += "<h4>"+ rObj.title +"</h4>";
-						li += "<p><i>Date Publish:"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
+						li += "<p><i>"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
 						li += "</a></li>";
 						list[index] = li;
                     });
@@ -398,7 +398,7 @@
 				        li += "<a href='untv-newsdetails.html?id=" + rObj.id + "' data-ajax='false'>";
 				        li += "<img src='" + rObj.thumbnail  + "' />";
 						li += "<h4>"+ rObj.title +"</h4>";
-						li += "<p><i>Date Publish:"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
+						li += "<p><i>"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
 						li += "</a></li>";
 						list[index] = li;
 						postid[y] = rObj.id;
@@ -410,13 +410,9 @@
 						thumbnail[y] = rObj.thumbnail;
 						y = y + 1;
                     });
-					
-			$.each(thumbnail,
-				 function(intIndex, objValue ){
-						  getfile(objValue);
-						  alert(localimage);
-			     }
-			);
+				getfile(thumbnail[0]);
+				alert(localimage);	
+			
 					
 						
 			// insert to local database
@@ -430,13 +426,14 @@
 //						  }
 //						);
 //						},errorCB1, successCB1);
-//						
-//                    list = list.reverse();
-//                    $('ul#newsroom').append(li);
-//					$("#newsroom").listview("refresh");
-//					
-//					//hide the page loader
-//			        $.mobile.hidePageLoadingMsg();
+//				
+		
+                    list = list.reverse();
+                    $('ul#newsroom').append(li);
+					$("#newsroom").listview("refresh");
+					
+					//hide the page loader
+			        $.mobile.hidePageLoadingMsg();
 
            });
 				
