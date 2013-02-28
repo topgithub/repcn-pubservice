@@ -414,10 +414,12 @@
                 $('ul#newsroom').append(li);
 			    $("#newsroom").listview("refresh");
 					
-				alert(thumbnail[0]);	
-				getfile(thumbnail[0]);
-				
-			
+				$.each(thumbnail,
+							function( intIndex, objValue ){
+								alert(thumbnail[intIndex]);
+					        }
+						);
+
 					
 						
 			// insert to local database
