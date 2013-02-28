@@ -230,7 +230,7 @@
     //
     function queryDB(tx) {
         tx.executeSql('SELECT * FROM CATEGORY', [], querySuccess, errorCB);
-		tx.executeSql('SELECT * FROM NEWS', [], querySuccess1, errorCB1);
+		tx.executeSql("SELECT * FROM NEWS where catid='0216'", [], querySuccess1, errorCB1);
     }
 	
 	// Query the success callback
@@ -240,8 +240,7 @@
 	 $('#home-list').append('<ul id="untv-category">');
      var li = "";
 	 for (var i=0; i<len; i++){
-	     //alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
-		 li += "<li><a href='#' onClick='loadcategory(" + results.rows.item(i).id + ");' data-ajax='false'>";
+	     li += "<li><a href='#' onClick='loadcategoryoffline(" + results.rows.item(i).id + ");' data-ajax='false'>";
          li += results.rows.item(i).data;
          li += "</a></li>";
 			
@@ -322,7 +321,12 @@
   function loadcategory(newsid)
   {
 	  currentpage = 1;
-	 //cue the page loader
+	   var postid;
+	   var newstitle;
+	   var datepub;
+	   var excerpt;
+	   var content;
+	  //cue the page loader
 			$.mobile.showPageLoadingMsg();
 			
 			//use theme swatch "b", a custom message, and no spinner
@@ -345,10 +349,27 @@
 						li += "<p><i>"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
 						li += "</a></li>";
 						list[index] = li;
+						postid[y] = rObj.id;
+						newstitle[y]  = rObj.title;
+	 					datepub[y]  = rObj.date;
+	 					excerpt[y]  = rObj.excerpt;
+	 					content[y]  = rObj.content;
                     });
                     //list = list.reverse();
                     $('ul#newsroom').append(li);
 					$("#newsroom").listview("refresh");
+					
+					//---------insert to local database -----------------------//
+				db.transaction(function (tx) {
+		    	tx.executeSql('CREATE TABLE IF NOT EXISTS NEWS (postid unique,catid,newstitle,datepub,excerpt,content,thumbnail)');
+						$.each(postid,
+							function( intIndex, objValue ){
+							  tx.executeSql("INSERT INTO NEWS (postid, catid,newstitle,datepub,excerpt,content) VALUES (?,?,?,?,?,?)",[objValue,newsid, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex]]);
+						  }
+						);
+						},errorCB1, successCB1);
+					// ------------insert to database	------------------------//
+						
 					// generate load more button
 					$('#loadmore').append('<a href="" data-icon="arrow-d" onClick="loadmore('+ newsid +');" id="myNewButton">Load more...</a>');
                     $('#myNewButton').button();
@@ -361,6 +382,37 @@
 				
   }
   
+  function loadcategoryoffline(newsid)
+  {
+	  $.mobile.showPageLoadingMsg();
+	  //use theme swatch "b", a custom message, and no spinner
+	  $.mobile.showPageLoadingMsg("b", "Please wait...", true);
+	  db.transaction(
+	   function (tx) {
+		    tx.executeSql("SELECT * FROM NEWS where catid='" + newsid + "'");
+						},errorCB1, successCB2);
+      //hide the page loader
+	  $.mobile.hidePageLoadingMsg();
+
+  }
+  
+  function successCB2(tx, results) {
+	 var len = results.rows.length;
+	 $('#newsroom').append('<ul>');
+	  var li = "";
+      for (var i=0; i<len; i++){
+            //console.log(rObj);
+            li += "<li>";
+			li += "<a href='untv-newsdetails.html?id=" +  results.rows.item(i).postid + "' data-ajax='false'>";
+			li += "<img src='images/ito-ang-balita1.png' />";
+			li += "<h4>"+ results.rows.item(i).newstitle +"</h4>";
+			li += "<p><i>"+ results.rows.item(i).pubdate + "</i><br />" + results.rows.item(i).excerpt +"</p>";
+			li += "</a></li>";
+	   }
+	   $('ul#newsroom').append(li);
+	   $("#newsroom").listview("refresh");		
+	}
+	
   // ------ Load Recent News ----------- //
   function loadrecent()
   {
@@ -413,22 +465,15 @@
 				//list = list.reverse();
                 $('ul#newsroom').append(li);
 			    $("#newsroom").listview("refresh");
-					
-				$.each(thumbnail,
-							function( intIndex, objValue ){
-								 
-					        }
-						);
-
-					
 						
 			// insert to local database
+			var mycatid = "0216";
 			db.transaction(function (tx) {
 		    tx.executeSql('DROP TABLE IF EXISTS NEWS');
           	tx.executeSql('CREATE TABLE IF NOT EXISTS NEWS (postid unique, catid,newstitle,datepub,excerpt,content,thumbnail)');
 						$.each(postid,
 							function( intIndex, objValue ){
-							  tx.executeSql("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content) VALUES (?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex]]);
+							 tx.executeSql("INSERT INTO NEWS (postid,catid, newstitle,datepub,excerpt,content) VALUES (?,?,?,?,?,?)",[objValue,  mycatid, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex]]);
 						  }
 						);
 						},errorCB1, successCB1);
