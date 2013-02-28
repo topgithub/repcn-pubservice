@@ -328,7 +328,6 @@
 	   var content;
 	  //cue the page loader
 			$.mobile.showPageLoadingMsg();
-			
 			//use theme swatch "b", a custom message, and no spinner
 			$.mobile.showPageLoadingMsg("b", "Please wait...", true);
 			
@@ -339,7 +338,12 @@
 					$("#news-title").text(response.category.title);
 					var posts = response.posts; //here's your response
                     $('#newsroom').append('<ul>');
-                    var li = "", list = [];
+                    var li = "";
+					postid  = new Array();
+	                newstitle  = new Array();
+	                datepub  = new Array();
+	                excerpt  = new Array();
+	                content  = new Array();
                     $.each(posts, function (index, rObj) {
                         //console.log(rObj);
                         li += "<li>";
@@ -348,7 +352,6 @@
 						li += "<h4>"+ rObj.title +"</h4>";
 						li += "<p><i>"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
 						li += "</a></li>";
-						list[index] = li;
 						postid[y] = rObj.id;
 						newstitle[y]  = rObj.title;
 	 					datepub[y]  = rObj.date;
@@ -359,7 +362,7 @@
                     $('ul#newsroom').append(li);
 					$("#newsroom").listview("refresh");
 					
-					//---------insert to local database -----------------------//
+				//---------insert to local database -----------------------//
 				db.transaction(function (tx) {
 		    	tx.executeSql('CREATE TABLE IF NOT EXISTS NEWS (postid unique,catid,newstitle,datepub,excerpt,content,thumbnail)');
 						$.each(postid,
