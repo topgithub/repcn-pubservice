@@ -416,7 +416,9 @@
           	tx.executeSql('CREATE TABLE IF NOT EXISTS NEWS (postid unique, catid,newstitle,datepub,excerpt,content,thumbnail)');
 						$.each(postid,
 							function( intIndex, objValue ){
+								alert(intIndex + " " + objValue);
 								localthumb = getfile(thumbnail[intIndex]);
+								alert(localthumb);
 							    tx.executeSql("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex],localthumb]);
 						  }
 						);
