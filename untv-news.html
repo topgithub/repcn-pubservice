@@ -117,6 +117,7 @@
 	var db = window.openDatabase("untv", "1.0", "UNTV DB", 1000000);
 	var catid;
 	var catname;
+	var localimage;
 	function onLoad() {
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -410,22 +411,13 @@
 						y = y + 1;
                     });
 			// insert to local database
-			var localthumb;
 			db.transaction(function (tx) {
 		    tx.executeSql('DROP TABLE IF EXISTS NEWS');
           	tx.executeSql('CREATE TABLE IF NOT EXISTS NEWS (postid unique, catid,newstitle,datepub,excerpt,content,thumbnail)');
 						$.each(postid,
 							function( intIndex, objValue ){
-								alert(intIndex + " " + objValue);
-								//localthumb = getfile(thumbnail[intIndex]);
-								alert(thumbnail[intIndex]);
-								alert(objValue + " " + 
-								newstitle[intIndex] + " " + 
-								datepub[intIndex] + " " +
-								excerpt[intIndex] + " " +
-								content[intIndex] + " " + 
-								localthumb);
-							    //alert("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex],localthumb]);
+								getfile(thumbnail[intIndex]);
+								tx.executeSql("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex],localimage]);
 						  }
 						);
 						},errorCB1, successCB1);
@@ -458,7 +450,7 @@
                                            sPath + filename,
                                            function(theFile) {
                                            //alert("download complete: " + theFile.toURI());
-                                           return theFile.toURI();
+                                           localimage = theFile.toURI();
 										   },
                                            function(error) {
                                            alert("download error source " + error.source);
