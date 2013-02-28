@@ -400,7 +400,7 @@
 						li += "<h4>"+ rObj.title +"</h4>";
 						li += "<p><i>"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
 						li += "</a></li>";
-						list[index] = li;
+						//list[index] = li;
 						postid[y] = rObj.id;
 						newstitle[y]  = rObj.title;
 	 					datepub[y]  = rObj.date;
@@ -410,6 +410,10 @@
 						thumbnail[y] = rObj.thumbnail;
 						y = y + 1;
                     });
+				//list = list.reverse();
+                $('ul#newsroom').append(li);
+			    $("#newsroom").listview("refresh");
+					
 				alert(thumbnail[0]);	
 				getfile(thumbnail[0]);
 				
@@ -429,11 +433,7 @@
 //						},errorCB1, successCB1);
 //				
 		
-                    list = list.reverse();
-                    $('ul#newsroom').append(li);
-					$("#newsroom").listview("refresh");
-					
-					//hide the page loader
+                    //hide the page loader
 			        $.mobile.hidePageLoadingMsg();
 
            });
