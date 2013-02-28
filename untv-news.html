@@ -369,7 +369,7 @@
 	 var datepub  = new Array();
 	 var excerpt  = new Array();
 	 var content  = new Array();
-	 var thumbnail  = new Array();
+	 var thumbnail;
 	 //cue the page loader
 			$.mobile.showPageLoadingMsg();
 			
@@ -384,8 +384,11 @@
 					var posts = response.posts; //here's your response
                     $('#newsroom').append('<ul>');
                     var li = "", list = [];
+					thumbnail  = new Array();
+					var y = 0;
                     $.each(posts, function (index, rObj) {
                         //console.log(rObj);
+						y = y + 1;
                         li += "<li>";
 				        li += "<a href='untv-newsdetails.html?id=" + rObj.id + "' data-ajax='false'>";
 				        li += "<img src='" + rObj.thumbnail  + "' />";
@@ -399,8 +402,7 @@
 	 					excerpt[index]  = rObj.excerpt;
 	 					content[index]  = rObj.content;
 						// save image to device
-						getfile(rObj.thumbnail);
-						thumbnail[index] = rObj.thumbnail;
+						thumbnail[y] = rObj.thumbnail;
                     });
 			  
 			  alert(thumbnail[1]);
