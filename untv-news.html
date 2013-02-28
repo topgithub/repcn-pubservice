@@ -400,9 +400,12 @@
 	 					content[index]  = rObj.content;
 						// save image to device
 						getfile(rObj.thumbnail);
-						
+						thumbnail[index] = rObj.thumbnail;
                     });
-					
+			  
+			  alert(thumbnail[1]);
+			  alert(thumbnail[2]);
+			  alert(thumbnail[3]);		
 		    // insert to local database
 			//db.transaction(function (tx) {
 //		    tx.executeSql('DROP TABLE IF EXISTS NEWS');
