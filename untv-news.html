@@ -419,7 +419,13 @@
 								alert(intIndex + " " + objValue);
 								localthumb = getfile(thumbnail[intIndex]);
 								alert(localthumb);
-							    tx.executeSql("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex],localthumb]);
+								alert(objValue + " " + 
+								newstitle[intIndex] + " " + 
+								datepub[intIndex] + " " +
+								excerpt[intIndex] + " " +
+								content[intIndex] + " " + 
+								localthumb);
+							    //alert("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex],localthumb]);
 						  }
 						);
 						},errorCB1, successCB1);
