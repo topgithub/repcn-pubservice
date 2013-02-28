@@ -141,17 +141,19 @@ function getParameterByName(name)
 	// Handle the offline event
     function onOffline() {
 		alert("You are offline");
-		db.transaction(queryDB, errorCB);
+		db.transaction(queryDB, errorCB1);
     }
 	
 	// Query the database
     function queryDB(tx) {
 		var iid = getParameterByName("id");
+		alert('SELECT * FROM NEWS where postid=' + iid);
         tx.executeSql('SELECT * FROM NEWS where postid=' + iid, [], querySuccess1, errorCB1);
     }
 	
 	function querySuccess1(tx, results) {
 	 var len = results.rows.length;
+	 alert(len);
 	  for (var i=0; i<len; i++){
             //console.log(rObj);
             $("#newstitle").text(results.rows.item(i).newstitle); 
