@@ -339,11 +339,13 @@
 					var posts = response.posts; //here's your response
                     $('#newsroom').append('<ul>');
                     var li = "";
+					
 					postid  = new Array();
 	                newstitle  = new Array();
 	                datepub  = new Array();
 	                excerpt  = new Array();
 	                content  = new Array();
+					var y = 0;
                     $.each(posts, function (index, rObj) {
                         //console.log(rObj);
                         li += "<li>";
@@ -353,10 +355,11 @@
 						li += "<p><i>"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
 						li += "</a></li>";
 						postid[y] = rObj.id;
-						newstitle[y]  = rObj.title;
+						newstitle[y] = rObj.title;
 	 					datepub[y]  = rObj.date;
 	 					excerpt[y]  = rObj.excerpt;
 	 					content[y]  = rObj.content;
+						y = y + 1;
                     });
                     //list = list.reverse();
                     $('ul#newsroom').append(li);
