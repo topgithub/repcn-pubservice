@@ -16,7 +16,7 @@
 
 </head> 
 
-<body id="untv"> 
+<body id="untv" onload="onLoad()"> 
 
 <div id="wrapper" data-role="page">
 
@@ -102,9 +102,19 @@ function getParameterByName(name)
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-    $(document).ready(function () {
-		 // http://www.untvweb.com/news/api/get_post/?dev=1&id=20930
-		 //cue the page loader
+    function onLoad() {
+        document.addEventListener("online", onOnline, false);
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+	 // Cordova is loaded and it is now safe to make calls Cordova methods
+    //
+    function onDeviceReady() {
+		document.addEventListener("offline", onOffline, false);
+    }
+	
+    // Handle the online event
+    function onOnline() {
+	   //cue the page loader
 			$.mobile.showPageLoadingMsg();
 			
 			//use theme swatch "b", a custom message, and no spinner
@@ -113,8 +123,7 @@ function getParameterByName(name)
 		var iid = getParameterByName("id");
 	    
 		 var url = "http://www.untvweb.com/news/api/get_post/?callback=?&id=" + iid;
-		 
-				 $.getJSON(url).done(function (response) {
+		      $.getJSON(url).done(function (response) {
                     console.log(response.post);
                     //var posts = response.posts; //here's your response
                     var r = response.post;
@@ -125,7 +134,35 @@ function getParameterByName(name)
                 }); 
 			//hide the page loader
 			$.mobile.hidePageLoadingMsg();	
-	 });
+	}
+	
+	// Handle the offline event
+    function onOffline() {
+		alert("You are offline");
+		db.transaction(queryDB, errorCB);
+    }
+	
+	// Query the database
+    function queryDB(tx) {
+		var iid = getParameterByName("id");
+        tx.executeSql('SELECT * FROM NEWS where postid=' + iid, [], querySuccess1, errorCB1);
+    }
+	
+	function querySuccess1(tx, results) {
+	 var len = results.rows.length;
+	  for (var i=0; i<len; i++){
+            //console.log(rObj);
+            $("#newstitle").text(results.rows.item(i).newstitle); 
+			$("#pubdate").text(results.rows.item(i).pubdate); 
+			$("#newscontent").html(results.rows.item(i).content);
+	   }
+	   	
+	}
+	
+	function errorCB1(err) {
+        alert("News Details Error processing SQL: "+err.code);
+     }
+	 
 </script>
 </body>
 </html>
