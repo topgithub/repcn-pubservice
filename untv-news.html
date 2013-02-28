@@ -395,11 +395,11 @@
 	  $.mobile.showPageLoadingMsg("b", "Please wait...", true);
 	  db.transaction(
 	   function (tx) {
-		    tx.executeSql("SELECT * FROM NEWS where catid=" + newsid);
-						},errorCB1, successCB2);
+		    tx.executeSql("SELECT * FROM NEWS where catid='" + newsid + "'", [], errorCB1, successCB2);
+		});
+
       //hide the page loader
 	  $.mobile.hidePageLoadingMsg();
-
   }
   
   function successCB2(tx, results) {
