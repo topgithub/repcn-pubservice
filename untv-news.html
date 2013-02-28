@@ -410,8 +410,9 @@
 						thumbnail[y] = rObj.thumbnail;
 						y = y + 1;
                     });
+				alert(thumbnail[0]);	
 				getfile(thumbnail[0]);
-				alert(localimage);	
+				
 			
 					
 						
@@ -456,8 +457,8 @@
                                            strimageurl,
                                            sPath + filename,
                                            function(theFile) {
-                                           //alert("download complete: " + theFile.toURI());
-                                           localimage = theFile.toURI();
+                                           alert("download complete: " + theFile.toURI());
+                                           //localimage = theFile.toURI();
 										   },
                                            function(error) {
                                            alert("download error source " + error.source);
