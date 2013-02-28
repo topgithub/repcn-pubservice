@@ -379,7 +379,7 @@
 			
 	 $('#newsroom').empty();
 	 $('#loadmore').empty();
-	 var url2 = "http://www.untvweb.com/news/api/get_recent_posts/?callback=?&count=3";
+	 var url2 = "http://www.untvweb.com/news/api/get_recent_posts/?callback=?&count=10";
 	            $.getJSON(url2).done(function (response) {
 					$("#news-title").text("Latest News");
 					var posts = response.posts; //here's your response
