@@ -393,18 +393,18 @@
 	  $.mobile.showPageLoadingMsg();
 	  //use theme swatch "b", a custom message, and no spinner
 	  $.mobile.showPageLoadingMsg("b", "Please wait...", true);
-	  alert("SELECT * FROM NEWS where catid=" + newsid);
-	  /*db.transaction(
+	  db.transaction(
 	   function (tx) {
 		    tx.executeSql("SELECT * FROM NEWS where catid=" + newsid);
 						},errorCB1, successCB2);
       //hide the page loader
-	  $.mobile.hidePageLoadingMsg();*/
+	  $.mobile.hidePageLoadingMsg();
 
   }
   
   function successCB2(tx, results) {
 	 var len = results.rows.length;
+	 alert(len);
 	 $('#newsroom').append('<ul>');
 	  var li = "";
       for (var i=0; i<len; i++){
