@@ -364,11 +364,11 @@
   function loadrecent()
   {
      currentpage = 1;
-	 var postid  = new Array();
-	 var newstitle  = new Array();
-	 var datepub  = new Array();
-	 var excerpt  = new Array();
-	 var content  = new Array();
+	 var postid;
+	 var newstitle;
+	 var datepub;
+	 var excerpt;
+	 var content;
 	 var thumbnail;
 	 //cue the page loader
 			$.mobile.showPageLoadingMsg();
@@ -384,43 +384,43 @@
 					var posts = response.posts; //here's your response
                     $('#newsroom').append('<ul>');
                     var li = "", list = [];
+				    postid  = new Array();
+	                newstitle  = new Array();
+	                datepub  = new Array();
+	                excerpt  = new Array();
+	                content  = new Array();
 					thumbnail  = new Array();
 					var y = 0;
                     $.each(posts, function (index, rObj) {
                         //console.log(rObj);
-						y = y + 1;
-                        li += "<li>";
+						li += "<li>";
 				        li += "<a href='untv-newsdetails.html?id=" + rObj.id + "' data-ajax='false'>";
 				        li += "<img src='" + rObj.thumbnail  + "' />";
 						li += "<h4>"+ rObj.title +"</h4>";
 						li += "<p><i>Date Publish:"+ rObj.date + "</i><br />" + rObj.excerpt +"</p>";
 						li += "</a></li>";
 						list[index] = li;
-						postid[index] = rObj.id;
-						newstitle[index]  = rObj.title;
-	 					datepub[index]  = rObj.date;
-	 					excerpt[index]  = rObj.excerpt;
-	 					content[index]  = rObj.content;
+						postid[y] = rObj.id;
+						newstitle[y]  = rObj.title;
+	 					datepub[y]  = rObj.date;
+	 					excerpt[y]  = rObj.excerpt;
+	 					content[y]  = rObj.content;
 						// save image to device
 						thumbnail[y] = rObj.thumbnail;
+						y = y + 1;
                     });
-			  
-			  alert(thumbnail[1]);
-			  alert(thumbnail[2]);
-			  alert(thumbnail[3]);		
-		    // insert to local database
-			//db.transaction(function (tx) {
-//		    tx.executeSql('DROP TABLE IF EXISTS NEWS');
-//          	tx.executeSql('CREATE TABLE IF NOT EXISTS NEWS (postid unique, catid,newstitle,datepub,excerpt,content,thumbnail)');
-//						$.each(postid,
-//							function( intIndex, objValue ){
-//							   if (intIndex != 0)
-//							   {
-//							     tx.executeSql("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex],thumbnail[intIndex]]);
-//							   }
-//						   }
-//						);
-//						},errorCB1, successCB1);
+			// insert to local database
+			var localthumb;
+			db.transaction(function (tx) {
+		    tx.executeSql('DROP TABLE IF EXISTS NEWS');
+          	tx.executeSql('CREATE TABLE IF NOT EXISTS NEWS (postid unique, catid,newstitle,datepub,excerpt,content,thumbnail)');
+						$.each(postid,
+							function( intIndex, objValue ){
+								localthumb = getfile(thumbnail[intIndex]);
+							    tx.executeSql("INSERT INTO NEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[objValue, newstitle[intIndex],datepub[intIndex],excerpt[intIndex],content[intIndex],localthumb]);
+						  }
+						);
+						},errorCB1, successCB1);
 						
                     list = list.reverse();
                     $('ul#newsroom').append(li);
@@ -449,8 +449,8 @@
                                            strimageurl,
                                            sPath + filename,
                                            function(theFile) {
-                                           alert("download complete: " + theFile.toURI());
-                                           //return theFile.toURI();
+                                           //alert("download complete: " + theFile.toURI());
+                                           return theFile.toURI();
 										   },
                                            function(error) {
                                            alert("download error source " + error.source);
