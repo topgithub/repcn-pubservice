@@ -115,8 +115,6 @@
                 $.getJSON(url).done(function (response) {
                     var r = response.posts; //here's your response
                     streamUrl = r[0].excerpt;
-                    alert(streamUrl);
-                    
                         jwplayer('untv-player').setup({
                         'flashplayer': 'player/player.swf',
                         'width': '320',
@@ -151,7 +149,7 @@
             
             // Handle the offline event
             function onOffline() {
-		alert("You are offline");
+		alert("This media is only available when an internet connection is present.");
 	    }
         </script>
         
