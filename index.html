@@ -38,7 +38,7 @@ body {
 <!-- Default JS of jQuery Mobile - Ends -->
     </head>
 
-    <body onload="screendetect();">
+    <body onload="onLoad();">
 <div id="wrapper" data-role="page" class="type-home">
         <div id="untv-mobile" data-role="content">
             <div id="button-untv" class="select-button">
@@ -51,10 +51,13 @@ body {
 </div>  
         <script type="text/javascript">
             
-           
+           function onLoad() {
+               
+               document.addEventListener("deviceready", onDeviceReady, false);
+           }
 
             function screendetect(){
-                document.addEventListener("deviceready", onDeviceReady, false);
+                
                  
                 var w = $(window).width();
                 var h = $(window).height();
@@ -100,19 +103,24 @@ body {
             });
             
             function onDeviceReady() {
-		$('#button-untv').live('tap',
+                
+                // set screen 
+                screendetect();
+		
+                // set tap button events
+                $('#button-untv').live('tap',
                 
                 function(event) {
                     window.location='untv-home.html';
                 });
-            }
-            function onDeviceReady() {
-		$('#button-untv-radio').live('tap',
+                
+                $('#button-untv-radio').live('tap',
                 
                 function(event) {
                     window.location='untv-radio-home.html'
                 });
             }
+            
 
         </script>
     </body>
