@@ -155,20 +155,16 @@ function getParameterByName(name)
 	
 	function querySuccess1(tx, results) {
 	 var len = results.rows.length;
-         var contenthtml;
-         var div;
-         var text;
-	 alert(len);
+         var s;
+         var $s
+          alert(len);
 	  for (var i=0; i<len; i++){
             //console.log(rObj);
-            contenthtml = results.rows.item(i).content;
-            div = document.createElement("div");
-            div.innerHTML = contenthtml;
-            text = div.textContent || div.innerText || "";
-            
+            s = results.rows.item(i).content;
+            $s = $(s).not('div');
             $("#newstitle").text(results.rows.item(i).newstitle); 
 			$("#pubdate").text(results.rows.item(i).pubdate); 
-			$("#newscontent").html(text);
+			$("#newscontent").html($s);
 	   }
 	   	
 	}
