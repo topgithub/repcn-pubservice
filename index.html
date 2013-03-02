@@ -41,10 +41,10 @@ body {
     <body onload="screendetect();">
 <div id="wrapper" data-role="page" class="type-home">
         <div id="untv-mobile" data-role="content">
-            <div id="button-untv" class="select-button" onclick="window.location='untv-home.html';" >
+            <div id="button-untv" class="select-button">
                 <img id="UNTV" src="images/untv/icon-home-untv.png" alt=""  />
             </div>
-            <div id="button-untv-radio" class="select-button" onclick="window.location='untv-radio-home.html';" >
+            <div id="button-untv-radio" class="select-button" >
                 <img id="UNTVRadio" src="images/untv/icon-home-radio.png" alt=""  />
             </div>
         </div>     
@@ -103,8 +103,14 @@ body {
 		$('#button-untv').live('tap',
                 
                 function(event) {
-                    alert('you tap me');
                     window.location='untv-home.html';
+                });
+            }
+            function onDeviceReady() {
+		$('#button-untv-radio').live('tap',
+                
+                function(event) {
+                    window.location='untv-radio-home.html'
                 });
             }
 
