@@ -113,9 +113,10 @@
                 var url = "http://www.untvweb.com/api/get_recent_posts/?callback=?&post_type=Streaming";
                 var streamUrl; 
                 $.getJSON(url).done(function (response) {
-                    //var posts = response.posts; //here's your response
-                    var r = response.post;
-                    streamUrl = response.posts[0].excerpt;
+                    var r = response.posts; //here's your response
+					
+		    streamUrl = r[0].excerpt;
+                    
 		  }); 
                  alert(streamUrl);
                  jwplayer('untv-player').setup({
