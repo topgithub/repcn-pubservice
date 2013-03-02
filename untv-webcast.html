@@ -116,34 +116,36 @@
                     var r = response.posts; //here's your response
                     streamUrl = r[0].excerpt;
                     alert(streamUrl);
+                    
+                        jwplayer('untv-player').setup({
+                        'flashplayer': 'player/player.swf',
+                        'width': '320',
+                        'height': '216',
+                        'provider': 'rtmp',  
+                        'streamer': 'rtmp://livestream01.untvweb.com/public/',
+                        'autostart': 'true',
+                        'stretching': 'exactfit',
+                        'file': 'untvwebstream',
+                        'abouttext': 'UNTV Web',
+                        'aboutlink': 'mailto:info@untvweb.com', 
+                        'events': {
+                            onBufferChange: function(event) { document.getElementById('untv-status').innerHTML = "Buffering..." },
+                            onPlay: function(event) { document.getElementById('untv-status').innerHTML = "Playing..."; },
+                            onBuffer: function(event) { document.getElementById('untv-status').innerHTML = "Buffering..."; },
+                            onIdle: function(event) { document.getElementById('untv-status').innerHTML = "Connection Idle."; },
+                            onPause: function(event) { document.getElementById('untv-status').innerHTML = "Stopped"; }
+                        },
+                        'modes':[{type: 'flash', src: 'player/player.swf'},{
+                                type: 'html5',
+                                config: {
+                                    levels: [ {'file': streamUrl} ],
+                                    'provider': 'video'
+                                }
+                            }]
+                        });
 		  }); 
                  
-                 jwplayer('untv-player').setup({
-                'flashplayer': 'player/player.swf',
-                'width': '320',
-                'height': '216',
-                'provider': 'rtmp',  
-                'streamer': 'rtmp://livestream01.untvweb.com/public/',
-                'autostart': 'true',
-                'stretching': 'exactfit',
-                'file': 'untvwebstream',
-                'abouttext': 'UNTV Web',
-                'aboutlink': 'mailto:info@untvweb.com', 
-                'events': {
-                    onBufferChange: function(event) { document.getElementById('untv-status').innerHTML = "Buffering..." },
-                    onPlay: function(event) { document.getElementById('untv-status').innerHTML = "Playing..."; },
-                    onBuffer: function(event) { document.getElementById('untv-status').innerHTML = "Buffering..."; },
-                    onIdle: function(event) { document.getElementById('untv-status').innerHTML = "Connection Idle."; },
-                    onPause: function(event) { document.getElementById('untv-status').innerHTML = "Stopped"; }
-                },
-                'modes':[{type: 'flash', src: 'player/player.swf'},{
-                        type: 'html5',
-                        config: {
-                            levels: [ {'file': streamUrl} ],
-                            'provider': 'video'
-                        }
-                    }]
-                });
+                
                 
             }
             
