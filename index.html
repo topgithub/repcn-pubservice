@@ -13,6 +13,10 @@
 <!-- Other css files -->
 <link rel="stylesheet" href="css/jqm-docs.css" />
 <link rel="stylesheet" href="css/untv-mobile.css" />
+
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
+
 <style>
 body {
 	background: url("images/untv/bg-home.jpg");
@@ -46,7 +50,12 @@ body {
         </div>     
 </div>  
         <script type="text/javascript">
+            
+           
+
             function screendetect(){
+                document.addEventListener("deviceready", onDeviceReady, false);
+                 
                 var w = $(window).width();
                 var h = $(window).height();
                 var ds = 0;
@@ -89,6 +98,16 @@ body {
             $(window).resize(function() {
                 screendetect();
             });
+            
+            function onDeviceReady() {
+		$('#button-untv').live('tap',
+                
+                function(event) {
+                    alert('you tap me');
+                    window.location='untv-home.html';
+                });
+            }
+
         </script>
     </body>
 </html>
