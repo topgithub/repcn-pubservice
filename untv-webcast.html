@@ -114,9 +114,9 @@
                 var streamUrl; 
                 $.getJSON(url).done(function (response) {
                     var r = response.posts; //here's your response
-                    alert(r[0].excerpt);
+                    streamUrl = r[0].excerpt;
 		  }); 
-                 
+                 alert(streamUrl);
                  jwplayer('untv-player').setup({
                 'flashplayer': 'player/player.swf',
                 'width': '320',
