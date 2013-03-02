@@ -109,8 +109,15 @@
             
             // Handle the online event
             function onOnline() {
-                 var streamUrl ="http://livestream01.untvweb.com:1935/public/untvwebstream/playlist.m3u8"; 
-                 
+                
+                var url = "http://www.untvweb.com/api/get_recent_posts/?callback=?&post_type=Streaming";
+                var streamUrl; 
+                $.getJSON(url).done(function (response) {
+                    //var posts = response.posts; //here's your response
+                    var r = response.post;
+                        streamUrl = r.excerpt;
+		  }); 
+                 alert(streamUrl);
                  jwplayer('untv-player').setup({
                 'flashplayer': 'player/player.swf',
                 'width': '320',
