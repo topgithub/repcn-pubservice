@@ -35,6 +35,9 @@ body#homepage #wrapper {
 	height: 1px;
 	width:100%;
 }
+body.save div#content {
+    padding: 15px;
+}
 /* UNTV Listing - Starts */
 #home-list li {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#81aeff)); /* Saf4+, Chrome */
@@ -377,6 +380,7 @@ body#untv-radio #content h2#untv-webcast-text {
 	#icon-twitter .ui-icon { background:  url('../images/icons/twitter-white.png') 50% 50% no-repeat; background-size: 24px 24px; }
 	#icon-contact .ui-icon { background:  url('../images/icons/contact-white.png') 50% 50% no-repeat; background-size: 24px 24px; }
 	#icon-radio-webcast .ui-icon { background:  url('../images/icons/live-radio-white.png') 50% 50% no-repeat; background-size: 24px 24px; }
+	#icon-save .ui-icon { background:  url('../images/icons/save-white.png') 50% 50% no-repeat; background-size: 24px 24px; }
 
 div.wp-caption {
 	width: auto !important;
