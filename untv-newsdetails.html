@@ -16,6 +16,15 @@
 
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#icon-save').bind('tap', function(event) {
+                alert($("#newstitle").text());
+				 $("#icon-save").attr("disabled", "disabled");
+            });
+        });
+</script>    
+    
 </head> 
 
 <body id="untv" onload="onLoad()"> 
@@ -119,13 +128,13 @@ function getParameterByName(name)
     //
     function onDeviceReady() {
 		document.addEventListener("offline", onOffline, false);
-		$('#icon-save').live('tap',
+		/*$('#icon-save').live('tap',
                 
                 function(event) {
                     // save event here
 					alert($("#newstitle").text());
 					  $("#icon-save").attr("disabled", "disabled");
-                });
+                });*/
     }
 	
     // Handle the online event
