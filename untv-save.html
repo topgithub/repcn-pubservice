@@ -128,7 +128,8 @@ function onLoad() {
 	 $('#newsroom').append('<ul>');
 	  var li = "";
       for (var i=0; i<len; i++){
-                        //console.log(rObj);
+            //console.log(rObj);
+		    alert(results.rows.item(i).postid);
             li += "<li>";
 			li += "<a href='untv-savenewsdetails.html?id=" +  results.rows.item(i).postid + "' data-ajax='false'>";
 			li += "<img src='images/ito-ang-balita1.png' />";
