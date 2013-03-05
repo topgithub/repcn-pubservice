@@ -112,11 +112,21 @@ function getParameterByName(name)
     function onLoad() {
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
+		// set tap button events
+                $('#icon-save').live('tap',
+                
+                function(event) {
+                    // save event here
+					alert($("#newstitle").text);
+					
+                });		
+				
     }
 	 // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
 		document.addEventListener("offline", onOffline, false);
+		
     }
 	
     // Handle the online event
@@ -138,7 +148,8 @@ function getParameterByName(name)
 					$("#pubdate").text(r.date); 
 					$("#newscontent").html(r.content);
 					
-                }); 
+                });
+			 
 			//hide the page loader
 			$.mobile.hidePageLoadingMsg();	
 	}
