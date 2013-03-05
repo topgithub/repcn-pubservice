@@ -105,23 +105,9 @@
             //
             function onDeviceReady() {
 		       document.addEventListener("offline", onOffline, false);
-			   document.addEventListener("pause", onPause, false);
-			   document.addEventListener("resume", onResume, false);
-            }
+		    }
             
-			// Handle the resume event
-            //
-            function onResume() {
-             alert("Resume event");
-			}
-	
-			// Handle the pause event
-            //
-            function onPause() {
-               alert("On pause event!");
-			}
-	
-            // Handle the online event
+			// Handle the online event
             function onOnline() {
                 
                 var url = "http://www.untvweb.com/api/get_recent_posts/?callback=?&post_type=Streaming";
