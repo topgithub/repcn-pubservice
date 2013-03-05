@@ -162,8 +162,7 @@ function getParameterByName(name)
 	// Query the database
     function queryDB(tx) {
 	    var iid = getParameterByName("id");
-	    alert(iid);
-		tx.executeSql('SELECT * FROM SAVENEWS where postid=' + iid, [], querySuccess1, errorCB1);
+	    tx.executeSql('SELECT * FROM SAVENEWS where postid=?', [iid], querySuccess1, errorCB1);
     }
 	
 	function querySuccess1(tx, results) {
