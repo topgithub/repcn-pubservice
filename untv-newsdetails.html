@@ -113,20 +113,19 @@ function getParameterByName(name)
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
 		// set tap button events
-                $('#icon-save').live('tap',
                 
-                function(event) {
-                    // save event here
-					alert($("#newstitle").text);
-					
-                });		
-				
     }
 	 // Cordova is loaded and it is now safe to make calls Cordova methods
     //
     function onDeviceReady() {
 		document.addEventListener("offline", onOffline, false);
-		
+		$('#icon-save').live('tap',
+                
+                function(event) {
+                    // save event here
+					alert($("#newstitle").text());
+					
+                });
     }
 	
     // Handle the online event
