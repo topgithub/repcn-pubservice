@@ -57,9 +57,7 @@
         <div id="thumbnail" style="display:none">
 		  
         </div>
-            <div id="save-article">
-                <a href="#" data-role="button" data-theme="b" data-inline="true" data-mini="true" id="icon-save" data-icon="custom" onClick="savedata();" >Save</a>
-            </div>
+            
         </div>
 	</div><!-- /content -->
 	
@@ -164,8 +162,7 @@ function getParameterByName(name)
 	// Query the database
     function queryDB(tx) {
 		var iid = getParameterByName("id");
-		alert('SELECT * FROM NEWS where postid=' + iid);
-                tx.executeSql('SELECT * FROM NEWS where postid=' + iid, [], querySuccess1, errorCB1);
+		tx.executeSql('SELECT * FROM SAVENEWS where postid=' + iid, [], querySuccess1, errorCB1);
     }
 	
 	function querySuccess1(tx, results) {
@@ -184,22 +181,6 @@ function getParameterByName(name)
 	   	
 	}
 	
-	function errorCB1(err) {
-        alert("News Details Error processing SQL: "+err.code);
-     }
-	function savedata()
-	{
-	   // get Postid
-	   var iid = getParameterByName("id");
-	   // Process DB
-	   db.transaction(function (tx) {
-	     // create table 
-		 tx.executeSql('CREATE TABLE IF NOT EXISTS SAVENEWS (postid unique, catid,newstitle,datepub,excerpt,content,thumbnail)');
-		  // insert record
-		 tx.executeSql("INSERT INTO SAVENEWS (postid, newstitle,datepub,excerpt,content,thumbnail) VALUES (?,?,?,?,?,?)",[iid, $("#newstitle").text(),$("#pubdate").text(),$("#excerpt").text(),$("#newscontent").text(),$("#thumbnail").text()]); }
-		  ,errorCB1, successCB1);
-					
-	}
 	function errorCB1(err) {
         alert("Error processing SQL: "+err.code + ' ' + err.message);
     }
