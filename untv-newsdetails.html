@@ -183,7 +183,8 @@ function getParameterByName(name)
 	function savedata()
 	{
 	   alert($("#newstitle").text());
-	   $("#icon-save").attr("disabled", "disabled");	
+	   $("#icon-save").button('disable');
+	   $("#icon-save").button('refresh'); 	
 	}
 </script>
 </body>
