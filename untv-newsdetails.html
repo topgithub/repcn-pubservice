@@ -51,6 +51,9 @@
         <div id="newscontent">
 		  
         </div> 
+        <div id="excerpt" style="display:none">
+		  
+        </div>
             <div id="save-article">
                 <a href="#" data-role="button" data-theme="b" data-inline="true" data-mini="true" id="icon-save" data-icon="custom" onClick="savedata();" >Save</a>
             </div>
@@ -141,7 +144,7 @@ function getParameterByName(name)
 					$("#newstitle").text(r.title_plain); 
 					$("#pubdate").text(r.date); 
 					$("#newscontent").html(r.content);
-					
+					$("#excerpt").html(r.excerpt);
                 });
 			 
 			//hide the page loader
@@ -182,10 +185,25 @@ function getParameterByName(name)
      }
 	function savedata()
 	{
-	   alert($("#newstitle").text());
-	   $("#icon-save").button('disable');
-	   $("#icon-save").button('refresh'); 	
+	   // get Postid
+	   var iid = getParameterByName("id");
+	   // Process DB
+	   db.transaction(function (tx) {
+	     // create table 
+		 tx.executeSql('CREATE TABLE IF NOT EXISTS SAVENEWS (postid unique, catid,newstitle,datepub,excerpt,content)');
+		  // insert record
+		 tx.executeSql("INSERT INTO SAVENEWS (postid, newstitle,datepub,excerpt,content) VALUES (?,?,?,?,?)",[iid, $("#newstitle").text(),$("#pubdate").text(),$("#excerpt").text(),$("#newscontent").text()]); }
+		  ,errorCB1, successCB1);
+					
 	}
+	function successCB1() {
+   		 alert("News Successfully Saved!");
+	}
+	
+	function errorCB1(err) {
+        alert("Error processing SQL: "+err.code + ' ' + err.message);
+    }
+	
 </script>
 </body>
 </html>
