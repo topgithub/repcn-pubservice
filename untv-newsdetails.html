@@ -200,6 +200,10 @@ function getParameterByName(name)
 		  ,errorCB1, successCB1);
 					
 	}
+	function successCB1() {
+   		 alert("News Successfully Saved!");
+	}
+	
 	function errorCB1(err) {
         alert("Error processing SQL: "+err.code + ' ' + err.message);
     }
