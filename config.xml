@@ -13,6 +13,7 @@ UNTVWEB Build application.
 <author href="https://example.com" email="you@example.com">
 William Ragrag
 </author>
+<preference name="keepRunning" value="true" />
  <icon src="icon.png" />
     <icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:density="ldpi" />
     <icon src="res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:density="mdpi" />
