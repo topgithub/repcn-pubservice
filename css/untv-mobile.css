@@ -381,6 +381,7 @@ body#untv-radio #content h2#untv-webcast-text {
 	#icon-contact .ui-icon { background:  url('../images/icons/contact-white.png') 50% 50% no-repeat; background-size: 24px 24px; }
 	#icon-radio-webcast .ui-icon { background:  url('../images/icons/live-radio-white.png') 50% 50% no-repeat; background-size: 24px 24px; }
 	#icon-save .ui-icon { background:  url('../images/icons/save-white.png') 50% 50% no-repeat; background-size: 24px 24px; }
+	#icon-save-footer .ui-icon { background:  url('../images/icons/save-white-old.png') 50% 50% no-repeat; background-size: 24px 24px; }
 
 div.wp-caption {
 	width: auto !important;
