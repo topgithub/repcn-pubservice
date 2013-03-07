@@ -17,11 +17,37 @@
 <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
 <script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
 
-<script type="text/javascript">
+
+</head> 
+
+<body onLoad="onLoad();">
+<div data-role="dialog">
+	
+		<div data-role="header" data-theme="d">
+			<h1>Delete Save News</h1>
+        </div>
+
+		<div data-role="content" data-theme="b">
+			<h1>Delete this News?</h1>
+	<a href="dialog/index.html" data-role="button" data-rel="back" data-theme="b" onClick="deleteRecord();">Yes</a>       
+			<a href="dialog/index.html" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
+		</div>
+	</div>
+    <script type="text/javascript">
 
 var db = window.openDatabase("untv", "1.0", "UNTV DB", 1000000);
 var deleteStatement = "DELETE FROM SAVENEWS WHERE postid=?";
 
+function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+}
+            // Cordova is loaded and it is now safe to make calls Cordova methods
+    //
+    function onDeviceReady() {
+		
+    }
+	
+	
 function getParameterByName(name)
 {
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -50,21 +76,5 @@ function showRecords() {
       }  
 
 </script>
-</head> 
-
-<body>
-<div data-role="dialog">
-	
-		<div data-role="header" data-theme="d">
-			<h1>Delete Save News</h1>
-        </div>
-
-		<div data-role="content" data-theme="b">
-			<h1>Delete this News?</h1>
-	<a href="dialog/index.html" data-role="button" data-rel="back" data-theme="b" onClick="deleteRecord();">Yes</a>       
-			<a href="dialog/index.html" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
-		</div>
-	</div>
-    
 </body>
 </html>
