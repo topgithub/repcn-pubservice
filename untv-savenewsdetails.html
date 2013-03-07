@@ -173,11 +173,9 @@ function getParameterByName(name)
           
 	  for (var i=0; i<len; i++){
             //console.log(rObj);
-            s = results.rows.item(i).content;
-            $s = $(s).not('div');
             $("#newstitle").text(results.rows.item(i).newstitle); 
 			$("#pubdate").text(results.rows.item(i).pubdate); 
-			$("#newscontent").html($s);
+			$("#newscontent").html(results.rows.item(i).content);
 	   }
 	  return false; 	
 	}
