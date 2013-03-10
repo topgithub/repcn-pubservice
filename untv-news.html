@@ -258,7 +258,10 @@
 	
 	function loadofflinemsg() 
 	{
-	  $("#news-title").text("You are currently offline");	
+	  $("#news-title").text("You are currently offline");
+	  $('#newsroom').empty();
+	  $('#loadmore').empty();
+	  $("#newsroom").listview("refresh");	
 	}
 	
 	 function querySuccess1(tx, results) {

@@ -147,14 +147,26 @@
                 
             }
             
-            // Handle the offline event
-            function onOffline() {
+			// alert dialog dismissed
+			function alertDismissed() {
+				// do something
+				
+			}
+			
+			// Show a custom alertDismissed
+    		//
+			function showAlert() {
 				navigator.notification.alert(
 				'This media is only available when an internet connection is present.',  // message
 				alertDismissed,         // callback
 				'UNTV Mobile',            // title
 				'Done'                  // buttonName
 				);
+			}
+	
+            // Handle the offline event
+            function onOffline() {
+				showAlert(); return false;
            }
         </script>
         
