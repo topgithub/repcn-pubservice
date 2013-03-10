@@ -192,8 +192,8 @@
     }
     
 	function populateDB(tx) {
-           tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
-           tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
+       tx.executeSql('DROP TABLE IF EXISTS CATEGORY');
+       tx.executeSql('CREATE TABLE IF NOT EXISTS CATEGORY (id unique, data)');
 	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[0], catname[0]]);
 	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[1], catname[1]]);
 	   tx.executeSql("INSERT INTO CATEGORY(id, data) VALUES (?,?)",[catid[2], catname[2]]);
@@ -202,23 +202,33 @@
      }
 
     function errorCB(err) {
-        alert("Error processing SQL: "+err.code);
+        navigator.notification.alert(
+				'News Details Error processing SQL: ' +err.code,  // message
+				alertDismissed,         // callback
+				'UNTV Mobile',            // title
+				'Done'                  // buttonName
+				);
      }
     function errorCB1(err) {
-        alert("News Details Error processing SQL: "+err.code);
+        	navigator.notification.alert(
+				'News Details Error processing SQL: ' +err.code,  // message
+				alertDismissed,         // callback
+				'UNTV Mobile',            // title
+				'Done'                  // buttonName
+				);
+				
      }
 	function successCB() {
-   		 alert("success!");
+   		 //alert("success!");
 	}
 	
 	function successCB1() {
-   		 alert("success inserting news details!");
+   		 //alert("success inserting news details!");
 	}
 	
 	// Handle the offline event
     //
     function onOffline() {
-		alert("You are offline");
 		db.transaction(queryDB, errorCB);
     }
 	
@@ -236,7 +246,7 @@
 	 $('#home-list').append('<ul id="untv-category">');
      var li = "";
 	 for (var i=0; i<len; i++){
-	     li += "<li><a href='#' onClick='loadcategoryoffline(" + results.rows.item(i).id + ");' data-ajax='false'>";
+	     li += "<li><a href='#' onClick='loadofflinemsg();' data-ajax='false'>";
          li += results.rows.item(i).data;
          li += "</a></li>";
 			
@@ -245,6 +255,11 @@
       $("#home-list").listview("refresh");
 		
      }
+	
+	function loadofflinemsg() 
+	{
+	  $("#news-title").text("You are currently offline");	
+	}
 	
 	 function querySuccess1(tx, results) {
 	 var len = results.rows.length;
@@ -384,25 +399,9 @@
 				
   }
   
-  function loadcategoryoffline(newsid)
-  {
-	  alert(newsid);
-	  $('#newsroom').empty();
-	  $.mobile.showPageLoadingMsg();
-	  //use theme swatch "b", a custom message, and no spinner
-	  $.mobile.showPageLoadingMsg("b", "Please wait...", true);
-	  db.transaction(
-	   function (tx) {
-		    tx.executeSql("SELECT * FROM NEWS WHERE catid=" + newsid,[],errorCB1, successCB2);
-		});
-
-      //hide the page loader
-	  $.mobile.hidePageLoadingMsg();
-  }
   
   function successCB2(tx, results) {
 	 var len = results.rows.length;
-	 alert(len);
 	 $('#newsroom').append('<ul>');
 	  var li = "";
       for (var i=0; i<len; i++){
