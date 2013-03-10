@@ -103,7 +103,7 @@
             // Cordova is loaded and it is now safe to make calls Cordova methods
             //
             function onDeviceReady() {
-		document.addEventListener("offline", onOffline, false);
+		       document.addEventListener("offline", onOffline, false);
             }
             
             // Handle the online event
@@ -174,7 +174,7 @@
 			
             // Handle the offline event
             function onOffline() {
-			    showAlert(); return false;
+			    showAlert();
 	        }
 
             			
