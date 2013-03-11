@@ -122,12 +122,23 @@ body.save div#content {
 	width: 180px !important;
 } 
 /* UNTV Player - Starts */
+#untv-player, #untvradio-player {
+    position: relative;
+}
 #untv-streaming-status {
     position: relative;
     height: 30px;
     text-align: center;
     width: 320px;
     margin: 0 auto;
+}
+@media all and (max-width:320px) {
+    #untv-player,
+    #untv-streaming-status, 
+    #untvradio-player, 
+    #untvradio-streaming-status {
+        left: -15px;
+    }
 }
 #untv-loader {
     width: 160px;
