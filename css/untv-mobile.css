@@ -348,6 +348,9 @@ body#untv-radio #content h2#untv-webcast-text {
 	margin-bottom: 0;
 	font-style: italic;
 }
+#programs {
+    margin: 0 !important;
+}
 #programs div.ui-bar {
 	min-height: 280px;
 	padding: 15px;
