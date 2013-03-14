@@ -138,9 +138,15 @@
 </div>
 <script type="text/javascript">
 function onLoad() {
+<<<<<<< HEAD
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
 	  
+=======
+       // document.addEventListener("online", onOnline, false);
+       // document.addEventListener("deviceready", onDeviceReady, false);
+	   loadschedule("Monday");
+>>>>>>> schedules
     }
 
     // Cordova is loaded and it is now safe to make calls Cordova methods
@@ -151,10 +157,9 @@ function onLoad() {
 
     function loadschedule(schedule)
 	{
-		 $('ul#programs').empty();
+		 $('#programs').empty();
 		 //cue the page loader
 			$.mobile.showPageLoadingMsg();
-			
 			//use theme swatch "b", a custom message, and no spinner
 			$.mobile.showPageLoadingMsg("b", "Please wait...", true);
 		 
