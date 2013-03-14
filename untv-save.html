@@ -122,7 +122,6 @@ function onLoad() {
     
 	function querySuccess2(tx, results) {
 	 var len = results.rows.length;
-	 alert(len);
 	 $('#newsroom').append('<ul>');
 	  var li = "";
       for (var i=0; i<len; i++){
@@ -145,7 +144,6 @@ function onLoad() {
 	}
 	function querySuccess1(tx, results) {
 	 var len = results.rows.length;
-	 alert(len);
 	 $('#newsroom').append('<ul>');
 	  var li = "";
       for (var i=0; i<len; i++){
@@ -164,8 +162,14 @@ function onLoad() {
 	
 	function errorCB1(err) {
         //alert("News Details Error processing SQL: "+err.code + " " + err.message );
+		navigator.notification.alert(
+            'No Saved items found.',  // message
+            alertDismissed,         // callback
+            'UNTV News',            // title
+            'Done'                  // buttonName
+        );
 		
-		alert("No Saved items found.");
+		
      }
 	 
 	 // process the confirmation dialog result
