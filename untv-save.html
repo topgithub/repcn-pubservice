@@ -103,14 +103,12 @@ function onLoad() {
 	// Handle the online event
     //
     function onOnline() {
-	   alert("You are online");
-		db.transaction(queryDB1, errorCB1);
+	   db.transaction(queryDB1, errorCB1);
 	}
 	
 	// Handle the offline event
     //
     function onOffline() {
-		alert("You are offline");
 		db.transaction(queryDB2, errorCB1);
     }
 	
@@ -141,6 +139,10 @@ function onLoad() {
 	   $("#newsroom").listview("refresh");		
 	}
 	
+	function deletenew(id)
+	{
+	  alert(id);
+	}
 	function querySuccess1(tx, results) {
 	 var len = results.rows.length;
 	 alert(len);
@@ -153,7 +155,7 @@ function onLoad() {
 			li += "<img src='"+ results.rows.item(i).thumbnail +"' />";
 			li += "<h4>"+ results.rows.item(i).newstitle +"</h4>";
 			li += "<p><i>"+ results.rows.item(i).pubdate + "</i><br />" + results.rows.item(i).excerpt +"</p></a>";
-			li += "<a href='delete.html?id="+ results.rows.item(i).postid + "' data-rel='dialog' data-transition='pop'>Delete Item</a>";
+			li += "<a href='#' data-role='button' data-icon='delete' onclick('deletenews(" + results.rows.item(i).postid  + ")')>Delete</a>";
 			li += "</li>";
 	   }
 	   $('ul#newsroom').append(li);
