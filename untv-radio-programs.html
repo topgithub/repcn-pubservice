@@ -21,8 +21,12 @@
 
 <!-- Other js files -->
 <script src="js/jqm-docs.js" type="text/javascript"></script>
+
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
+
 </head> 
-<body id="untv-radio"> 
+<body id="untv-radio" onload="onLoad()"> 
 <div id="wrapper" data-role="page" class="type-home">
 
 <div id="header" data-position="fixed" data-role="header" data-theme="a">
@@ -52,37 +56,37 @@
             
 			<ul id="home-list" data-role="listview">
 				<li>
-                    <a href="#" data-ajax="false">
+                    <a href="#" onClick="loadschedule('Monday');" data-ajax="false">
                     	Monday
                     </a>
                 </li>
 				<li>
-                    <a href="#" data-ajax="false">
+                    <a href="#" onClick="loadschedule('Tuesday');" data-ajax="false">
                     	Tuesday
                     </a>
                 </li>
 				<li>
-                    <a href="#" data-ajax="false">
+                    <a href="#" onClick="loadschedule('Wednesday');" data-ajax="false">
                     	Wednesday
                     </a>
                 </li>
 				<li>
-                    <a href="#" data-ajax="false">
+                    <a href="#" onClick="loadschedule('Thursday');" data-ajax="false">
                     	Thursday 
                     </a>
                 </li>
 				<li>
-                    <a href="#" data-ajax="false">
+                    <a href="#" onClick="loadschedule('Friday');" data-ajax="false">
                     	Friday
                     </a>
                 </li>
 				<li>
-                    <a href="#" data-ajax="false">
+                    <a href="#" onClick="loadschedule('Saturday');" data-ajax="false">
                     	Saturday
                     </a>
                 </li>
 				<li>
-                    <a href="#" data-ajax="false">
+                    <a href="#" onClick="loadschedule('Sunday');" data-ajax="false">
                     	Sunday
                     </a>
                 </li>
@@ -96,157 +100,10 @@
             	Monday: Program Schedules
             </h3>
         
-                    <ul id="programs" data-role="listview">
-                        <li data-role="list-divider">
-                            Programs
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    Itanong Mo Kay Soriano
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        12:00 - 3:00
-                                    </strong>
-                                    AM
-                                </p>
-                                    
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    Nasusulat
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        3:55 - 4:00
-                                    </strong>
-                                    AM
-                                </p>
-                                    
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    Good Morning Kuya
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        4:00 - 7:30
-                                    </strong>
-                                    AM
-                                </p>
-                            </a>
-                        </li>
-                            
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    Rise and Shine
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        8:00 - 9:00
-                                    </strong>
-                                    AM
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    Itanong Mo Kay Soriano
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        9:00 - 10:30
-                                    </strong>
-                                    AM
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    UNTV News
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        12:00 - 12:30
-                                    </strong>
-                                    PM
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    D'X Man
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        12:30 - 1:00
-                                    </strong>
-                                    PM
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    Itanong Mo Kay Soriano
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        1:00 - 3:00
-                                    </strong>
-                                    PM
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    Hataw Balita News Update
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        3:00 - 3:03
-                                    </strong>
-                                    PM
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    Truth In Focus
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        3:03 - 4:00
-                                    </strong>
-                                    PM
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.html">
-                                <h3>
-                                    KNC Show
-                                </h3>
-                                <p class="ui-li-aside">
-                                    <strong>
-                                        4:00 - 4:30
-                                    </strong>
-                                    PM
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
+                   <ul id="programs" data-role="listview">
+                
+			
+		    </ul>
         
         
 		</div> <!-- END .content-primary -->
@@ -275,6 +132,68 @@
     
 	</div><!-- /footer -->
 </div>
+<script type="text/javascript">
+function onLoad() {
 
+       document.addEventListener("online", onOnline, false);
+       document.addEventListener("deviceready", onDeviceReady, false);
+	 // loadschedule("Monday");
+
+    }
+
+    // Cordova is loaded and it is now safe to make calls Cordova methods
+    //
+    function onDeviceReady() {
+		document.addEventListener("offline", onOffline, false);
+    }
+
+    function loadschedule(schedule)
+	{
+		 $('#programs').empty();
+		 //cue the page loader
+			$.mobile.showPageLoadingMsg();
+			//use theme swatch "b", a custom message, and no spinner
+			$.mobile.showPageLoadingMsg("b", "Please wait...", true);
+		 
+		 $("#program-title").text(schedule + " Program Schedule");
+	     var url = "http://www.untvradio.com/api/programs/get_programs_by_day/?day=" + schedule + "&callback=?";
+         
+		  $.getJSON(url).done(function (response) {
+                    //console.log(response.categories);
+                    //var posts = response.posts; //here's your response
+                    var r = response.programs;
+                    $('#programs').append("<li data-role='list-divider'>Programs</li>");
+                    var li = "", list = [];
+                    $.each(r[0], function (index, rObj) {
+					    //console.log(rObj + "--data--");
+						  li = "";
+                          li += "<li>";
+						  li += "<a href='#'><img src='" + rObj.thumbnail + "' /><h4>&nbsp;&nbsp;&nbsp;" + rObj.title + "</h4>";
+                          li += "<p class='ui-li-aside'><strong>" + rObj.time_start +  " - " + rObj.time_end + "</strong></p></a></li>";
+						   list[index] = li;
+					  });
+                    list = list.reverse();
+                    $('#programs').append(list.join(''));
+                    
+			        $("#programs").listview("refresh");
+                   
+                });
+				//hide the page loader
+			    $.mobile.hidePageLoadingMsg();
+				
+	}
+    // Handle the online event
+    //
+    function onOnline() {
+	   loadschedule("Monday");
+	}
+	
+	// Handle the offline event
+    //
+    function onOffline() {
+	   
+	   
+	}
+</script>
 </body>
 </html>

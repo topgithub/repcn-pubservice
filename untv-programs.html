@@ -159,7 +159,7 @@ function onLoad() {
 			//use theme swatch "b", a custom message, and no spinner
 			$.mobile.showPageLoadingMsg("b", "Please wait...", true);
 		 
-		 $("#program-title").text(schedule);
+		 $("#program-title").text(schedule + " Program Schedule");
 	     var url = "http://www.untvweb.com/api/programs/get_programs_by_day/?day=" + schedule + "&callback=?";
          
 		  $.getJSON(url).done(function (response) {
