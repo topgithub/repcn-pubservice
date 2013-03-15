@@ -157,7 +157,6 @@ function getParameterByName(name)
 	
 	// Handle the offline event
     function onOffline() {
-		alert("You are offline");
 		db.transaction(queryDB, errorCB1);
     }
 	
@@ -202,12 +201,13 @@ function getParameterByName(name)
 	}
 	
 	function successCB1() {
-   		jAlert('News Successfully Saved!', 'UNTV News');
+   		navigator.notification.alert('News Successfully Saved!', null, "UNTV News", "Ok")
+		
 	}
 	
 	function errorCB1(err) {
         //alert("Error processing SQL: "+err.code + ' ' + err.message);
-		jAlert(err.message, 'UNTV News');
+		navigator.notification.alert(err.message, null, "UNTV News", "Ok")
 		
     }
 	
