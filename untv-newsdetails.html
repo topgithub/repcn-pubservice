@@ -202,23 +202,12 @@ function getParameterByName(name)
 	}
 	
 	function successCB1() {
-   		 navigator.notification.alert(
-            'News Successfully Saved!',  // message
-            alertDismissed,         // callback
-            'UNTV News',            // title
-            'Done'                  // buttonName
-        );
+   		jAlert('News Successfully Saved!', 'UNTV News');
 	}
 	
 	function errorCB1(err) {
         //alert("Error processing SQL: "+err.code + ' ' + err.message);
-		navigator.notification.alert(
-            err.message,  // message
-            alertDismissed,         // callback
-            'UNTV News',            // title
-            'Done'                  // buttonName
-        );
-		
+		jAlert(err.message, 'UNTV News');
 		
     }
 	
