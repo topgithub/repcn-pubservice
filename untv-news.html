@@ -14,11 +14,12 @@
 <link rel="stylesheet" href="css/jqm-docs.css" />
 <link rel="stylesheet" href="css/untv-mobile.css" />
 
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
+    <!-- PhoneGap JS -->
+    <script type="text/javascript" src="cordova-2.5.0.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
-</head> 
-<body id="untv" onload="onLoad()"> 
+</head>
+<body id="untv" onload="onLoad()">
 <div id="wrapper" data-role="page" class="type-home">
 
 <div id="header" data-fullscreen="true" data-position="fixed" data-role="header" data-theme="a">
@@ -38,11 +39,8 @@
 	<div id="content" data-role="content">
 
 		<div id="news-category" class="content-secondary" data-role="collapsible">
-
-            <h3 class="title" id="categorytitle">
-            	News Category
-            </h3>
-             
+            <div id="category-title-here" style="margin-top: 10px;"></div>
+            
 			<ul id="home-list" data-role="listview">
 				
 				
@@ -73,7 +71,7 @@
         <div id="footer-menu" data-role="navbar" data-iconpos="top" data-theme="a">
             <ul>
                 <li>
-                    <a href="untv-webcast.html" id="icon-webcast" data-icon="custom" data-ajax="false">
+                    <a href="#" onclick="getstreamdata();" id="icon-webcast" data-icon="custom" data-ajax="false">
                     	Webcast
                     </a>
                 </li>
@@ -114,6 +112,8 @@
 	var catid;
 	var catname;
 	var localimage;
+    var isoffline;
+    
 	function onLoad() {
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -128,14 +128,17 @@
     // Handle the online event
     //
     function onOnline() {
+        isoffline = 0;
 		var url = "http://www.untvweb.com/news/api/get_category_index/?callback=?";
 		$(document).ready(function () {
 			     // ------ Load News Category -------------//
+                          
 				 $.getJSON(url).done(function (response) {
                     //console.log(response.categories);
                     var posts = response.posts; //here's your response
                     var r = response.categories;
 					mycategory = response.categories;
+                    $('#category-title-here').append("<h3 class='title' id='categorytitle' style='text-align: left;'> News Category </h3>");
                     $('#home-list').append('<ul id="untv-category">');
                     var li = "", list = [];
 					var y = 0;
@@ -229,7 +232,9 @@
 	// Handle the offline event
     //
     function onOffline() {
+        isoffline = 1;
 		db.transaction(queryDB, errorCB);
+        $('#category-title-here').append("<h3 class='title' id='categorytitle'> News Category </h3>");
     }
 	
 	// Query the database
@@ -524,9 +529,18 @@
                      }, 
                      fail);
     }
-	
-            
-        </script>
+    
+    function getstreamdata() {
+        if (isoffline == 0)
+        {
+            getStreaming('untv');
+        }
+        else {
+            navigator.notification.alert('This media require internet connection.', null, "UNTV News", "Ok")
+        }
         
+    }
+        </script>
+    
 </body>
 </html>

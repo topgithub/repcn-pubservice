@@ -22,11 +22,12 @@
 <!-- Other js files -->
 <script src="js/jqm-docs.js" type="text/javascript"></script>
 
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
+    <!-- PhoneGap JS -->
+    <script type="text/javascript" src="cordova-2.5.0.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
-</head> 
-<body id="untv-radio" onload="onLoad()"> 
+</head>
+<body id="untv-radio" onload="onLoad()">
 <div id="wrapper" data-role="page" class="type-home">
 
 <div id="header" data-position="fixed" data-role="header" data-theme="a">
@@ -112,7 +113,7 @@
         <div id="footer-menu" data-role="navbar" data-iconpos="top" data-theme="a">
             <ul>
                 <li>
-                    <a href="untv-radio-webcast.html" id="icon-radio-webcast" data-icon="custom" data-ajax="false">
+                    <a href="#" onclick="getstreamdata();" id="icon-radio-webcast" data-icon="custom" data-ajax="false">
                     	Webcast
                     </a>
                 </li>
@@ -132,6 +133,7 @@
 	</div><!-- /footer -->
 </div>
 <script type="text/javascript">
+    var isoffline = 0;
 function onLoad() {
 
        document.addEventListener("online", onOnline, false);
@@ -184,15 +186,26 @@ function onLoad() {
     // Handle the online event
     //
     function onOnline() {
+        isoffline = 0;
 	   loadschedule("Monday");
 	}
 	
 	// Handle the offline event
     //
     function onOffline() {
-	   
+        isoffline = 1;
 	   
 	}
+    function getstreamdata() {
+        if (isoffline == 0)
+        {
+            getStreaming('untv-radio');
+        }
+        else {
+            navigator.notification.alert('This media require internet connection.', null, "UNTV News", "Ok")
+        }
+    }
+
 </script>
 </body>
 </html>

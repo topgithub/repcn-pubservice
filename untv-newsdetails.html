@@ -14,11 +14,12 @@
 <link rel="stylesheet" href="css/jqm-docs.css" />
 <link rel="stylesheet" href="css/untv-mobile.css" />
 
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
+    <!-- PhoneGap JS -->
+    <script type="text/javascript" src="cordova-2.5.0.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
     
-</head> 
+</head>
 
 <body id="untv" onload="onLoad()"> 
 
@@ -68,7 +69,7 @@
        <div id="footer-menu" data-role="navbar" data-iconpos="top" data-theme="a">
             <ul>
                 <li>
-                    <a href="untv-webcast.html" id="icon-webcast" data-icon="custom" data-ajax="false">
+                    <a href="#" onclick="getstreamdata();" id="icon-webcast" data-icon="custom" data-ajax="false">
                     	Webcast
                     </a>
                 </li>
@@ -104,7 +105,8 @@
 <script type="text/javascript">
 
 var db = window.openDatabase("untv", "1.0", "UNTV DB", 1000000);
-
+var isoffline = 0;
+    
 function getParameterByName(name)
 {
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -131,6 +133,7 @@ function getParameterByName(name)
 	
     // Handle the online event
     function onOnline() {
+        isoffline = 0;
 	   //cue the page loader
 			$.mobile.showPageLoadingMsg();
 			
@@ -157,6 +160,7 @@ function getParameterByName(name)
 	
 	// Handle the offline event
     function onOffline() {
+        isoffline = 1;
 		db.transaction(queryDB, errorCB1);
     }
 	
@@ -210,7 +214,15 @@ function getParameterByName(name)
 		navigator.notification.alert("News Already Saved!", null, "UNTV News", "Ok")
 		
     }
-	
+    function getstreamdata() {
+     if (isoffline == 0)
+         {
+            getStreaming('untv');
+        }
+         else {
+           navigator.notification.alert('This media require internet connection.', null, "UNTV News", "Ok")
+      }
+    }
 </script>
 </body>
 </html>

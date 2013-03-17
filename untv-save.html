@@ -14,11 +14,12 @@
 <link rel="stylesheet" href="css/jqm-docs.css" />
 <link rel="stylesheet" href="css/untv-mobile.css" />
 
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script>
+    <!-- PhoneGap JS -->
+    <script type="text/javascript" src="cordova-2.5.0.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
-</head> 
-<body id="untv" class="save" onLoad="onLoad();"> 
+</head>
+<body id="untv" class="save" onLoad="onLoad();">
 <div id="wrapper" data-role="page" class="type-home">
 
 <div id="header" data-fullscreen="true" data-position="fixed" data-role="header" data-theme="a">
@@ -39,8 +40,11 @@
 		
             <h3 id="news-title" class="title">
                 Bookmarks
+                
+                <a href="#" data-role="button" data-icon="delete" data-iconpos="left" data-mini="true" data-inline="true" style="float: right; font-size: 12px !important; margin-top: 0px !important;" onclick="showConfirmdeleteall(); return false;" id="deleteall">Delete All</a>
+                <div style="clear: both;"></div>
             </h3>
-            
+        
 		 <ul id="newsroom" data-role="listview" data-split-icon="delete" data-split-theme="b">
 			 
            
@@ -53,7 +57,7 @@
         <div id="footer-menu" data-role="navbar" data-iconpos="top" data-theme="a">
             <ul>
                 <li>
-                    <a href="untv-webcast.html" id="icon-webcast" data-icon="custom" data-ajax="false">
+                    <a href="#" onclick="getstreamdata();" id="icon-webcast" data-icon="custom" data-ajax="false">
                     	Webcast
                     </a>
                 </li>
@@ -89,7 +93,8 @@
 <script type="text/javascript">
 
 var db = window.openDatabase("untv", "1.0", "UNTV DB", 1000000);
-
+var isoffline = 0;
+    
 function onLoad() {
         document.addEventListener("online", onOnline, false);
         document.addEventListener("deviceready", onDeviceReady, false);
@@ -103,12 +108,14 @@ function onLoad() {
 	// Handle the online event
     //
     function onOnline() {
-	   db.transaction(queryDB1, errorCB1);
+        isoffline = 0;
+	    db.transaction(queryDB1, errorCB1);
 	}
 	
 	// Handle the offline event
     //
     function onOffline() {
+        isoffline = 1;
 		db.transaction(queryDB2, errorCB1);
     }
 	
@@ -131,7 +138,7 @@ function onLoad() {
 			li += "<img src='images/ito-ang-balita1.png' />";
 			li += "<h4>"+ results.rows.item(i).newstitle +"</h4>";
 			li += "<p><i>"+ results.rows.item(i).pubdate +"</i><br />" + results.rows.item(i).excerpt +"</p></a>";
-	li += "<a href='#' onclick='showConfirm(); return false;'>Delete Item</a>";
+	        li += "<a href='#' onclick='showConfirm(); return false;'>Delete Item</a>";
 			li += "</li>";
 	   }
 	   $('ul#newsroom').append(li);
@@ -153,7 +160,7 @@ function onLoad() {
 			li += "<img src='"+ results.rows.item(i).thumbnail +"' />";
 			li += "<h4>"+ results.rows.item(i).newstitle +"</h4>";
 			li += "<p><i>"+ results.rows.item(i).pubdate + "</i><br />" + results.rows.item(i).excerpt +"</p></a>";
-			li += "<a href='#' data-role='button' data-icon='delete' onclick('deletenews(" + results.rows.item(i).postid  + ")')>Delete</a>";
+			li += "<a href='#' onclick='showConfirm(); return false;'>Delete Item</a>";
 			li += "</li>";
 	   }
 	   $('ul#newsroom').append(li);
@@ -164,9 +171,9 @@ function onLoad() {
         //alert("News Details Error processing SQL: "+err.code + " " + err.message );
 		navigator.notification.alert(
             'No Saved items found.',  // message
-            alertDismissed,         // callback
-            'UNTV News',            // title
-            'Done'                  // buttonName
+            null,         // callback
+            'UNTV News',  // title
+            'Done'        // buttonName
         );
 		
 		
@@ -183,11 +190,51 @@ function onLoad() {
         navigator.notification.confirm(
             'Are you sure you want to delete this news?',  // message
             onConfirm,              // callback to invoke with index of button pressed
-            'Delete Save News',            // title
+            'Delete Save News', // title
             'Yes,No'          // buttonLabels
         );
     }
-	 
+    
+    // process the confirmation dialog result
+    function onConfirmall(buttonIndex) {
+        //alert('You selected button ' + buttonIndex);
+        if (buttonIndex == 1)
+        {
+           db.transaction(querydeleteall, errorCB1);
+        }
+        else
+        {
+           
+        }
+    }
+    
+    function showConfirmdeleteall() {
+        navigator.notification.confirm(
+            'Are you sure you want to delete all bookmark news?',  // message
+             onConfirmall,  // callback to invoke with index of button pressed
+             'Delete Bookmark', // title
+              'Yes,No'  // buttonLabels
+              );
+    }
+    
+    function getstreamdata() {
+        if (isoffline == 0)
+        {
+           getStreaming('untv');
+        }
+        else {
+           navigator.notification.alert('This media require internet connection.', null, "UNTV News", "Ok")
+        }
+    }
+    
+   function querydeleteall(tx) {
+        tx.executeSql("DELETE FROM SAVENEWS", [], deleteSuccess, errorCB1);
+    }
+    function deleteSuccess(tx, results) {
+        $('ul#newsroom').empty();
+        $("#newsroom").listview("refresh");
+        $("#deleteall").hide();
+    }
 </script>
         
 </body>

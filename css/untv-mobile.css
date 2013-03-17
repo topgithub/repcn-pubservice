@@ -348,9 +348,6 @@ body#untv-radio #content h2#untv-webcast-text {
 	margin-bottom: 0;
 	font-style: italic;
 }
-#programs {
-    margin: 0 !important;
-}
 #programs div.ui-bar {
 	min-height: 280px;
 	padding: 15px;
@@ -366,6 +363,9 @@ body#untv-radio #content h2#untv-webcast-text {
 #programs div.ui-bar p.time {
 	font-size: 12px;
 	text-align:center;
+}
+#programs span.ui-icon {
+    display: none;
 }
 #contact-us td.title {
 	padding-right: 10px;
